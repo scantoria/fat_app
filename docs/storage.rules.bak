@@ -1,0 +1,103 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper function to check authentication
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Helper function to check file size (10MB limit for documents, 5MB for images)
+    function isValidFileSize(maxSizeMB) {
+      return request.resource.size <= maxSizeMB * 1024 * 1024;
+    }
+    
+    // Helper function to check image file types
+    function isImageFile() {
+      return request.resource.contentType.matches('image/.*');
+    }
+    
+    // Helper function to check document file types
+    function isDocumentFile() {
+      return request.resource.contentType.matches('image/.*') ||
+             request.resource.contentType == 'application/pdf' ||
+             request.resource.contentType == 'application/msword' ||
+             request.resource.contentType == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    }
+    
+    // Animal avatars
+    // Path: /animals/{ownerId}/{farmId}/{animalId}/avatar/{filename}
+    match /animals/{ownerId}/{farmId}/{animalId}/avatar/{filename} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && 
+                     isImageFile() && 
+                     isValidFileSize(5);
+    }
+    
+    // Animal documents
+    // Path: /animals/{ownerId}/{farmId}/{animalId}/documents/{documentId}/{filename}
+    match /animals/{ownerId}/{farmId}/{animalId}/documents/{documentId}/{filename} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && 
+                     isDocumentFile() && 
+                     isValidFileSize(10);
+    }
+    
+    // Incident report photos
+    // Path: /animals/{ownerId}/{farmId}/{animalId}/incidents/{incidentId}/{filename}
+    match /animals/{ownerId}/{farmId}/{animalId}/incidents/{incidentId}/{filename} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && 
+                     isImageFile() && 
+                     isValidFileSize(5);
+    }
+    
+    // Breeding stock photos
+    // Path: /breedingStock/{stockId}/{filename}
+    match /breedingStock/{stockId}/{filename} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() &&
+                     isImageFile() &&
+                     isValidFileSize(5);
+    }
+
+    // Professional credential documents
+    // Path: /professionals/{professionalId}/credentials/{documentId}/{filename}
+    match /professionals/{professionalId}/credentials/{documentId}/{filename} {
+      allow read: if isAuthenticated() &&
+                    (request.auth.uid == professionalId ||
+                     // Admin can read for verification
+                     request.auth.token.admin == true);
+      allow write: if isAuthenticated() &&
+                     request.auth.uid == professionalId &&
+                     isDocumentFile() &&
+                     isValidFileSize(10);
+    }
+
+    // Professional profile photos
+    // Path: /professionals/{professionalId}/profile/{filename}
+    match /professionals/{professionalId}/profile/{filename} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() &&
+                     request.auth.uid == professionalId &&
+                     isImageFile() &&
+                     isValidFileSize(5);
+    }
+
+    // Consultation photos/documents
+    // Path: /consultations/{consultationId}/{filename}
+    match /consultations/{consultationId}/{filename} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() &&
+                     isImageFile() &&
+                     isValidFileSize(5);
+    }
+
+    // Temporary uploads (for offline mode)
+    // Path: /temp/{userId}/{filename}
+    match /temp/{userId}/{filename} {
+      allow read, write: if isAuthenticated() && request.auth.uid == userId;
+      // These files should be moved to permanent location within 24 hours
+    }
+  }
+}

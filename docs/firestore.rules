@@ -1,0 +1,199 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    function isOwner(ownerId) {
+      return isAuthenticated() && request.auth.uid == ownerId;
+    }
+    
+    function hasRoleOnFarm(farmId, roles) {
+      let userData = getUserData();
+      return isAuthenticated() && 
+             userData.farmAssignments != null &&
+             userData.farmAssignments.hasAny([farmId]) &&
+             userData.farmAssignments[farmId].role in roles;
+    }
+    
+    function isManagerOrOwner(farmId, ownerId) {
+      return isOwner(ownerId) || hasRoleOnFarm(farmId, ['Manager', 'Owner']);
+    }
+    
+    function canManageAnimals(farmId, ownerId) {
+      return isOwner(ownerId) || hasRoleOnFarm(farmId, ['Manager', 'Lead', 'Owner']);
+    }
+    
+    function canReadFarm(farmId, ownerId) {
+      return isOwner(ownerId) || hasRoleOnFarm(farmId, ['Manager', 'Lead', 'Farm Hand', 'Owner']);
+    }
+    
+    // Owners collection
+    match /owners/{ownerId} {
+      allow read: if isOwner(ownerId);
+      allow create: if isAuthenticated();
+      allow update, delete: if isOwner(ownerId);
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated() && request.auth.uid == userId;
+      allow create: if isAuthenticated();
+      allow update: if request.auth.uid == userId;
+      allow delete: if request.auth.uid == userId;
+    }
+    
+    // Farms collection
+    match /farms/{farmId} {
+      allow read: if canReadFarm(farmId, resource.data.ownerId);
+      allow create: if isAuthenticated();
+      allow update: if isManagerOrOwner(farmId, resource.data.ownerId);
+      allow delete: if isOwner(resource.data.ownerId);
+    }
+    
+    // Animals collection
+    match /animals/{animalId} {
+      allow read: if canReadFarm(resource.data.farmId, resource.data.ownerId);
+      allow create: if canManageAnimals(request.resource.data.farmId, request.resource.data.ownerId);
+      allow update: if canManageAnimals(resource.data.farmId, resource.data.ownerId);
+      allow delete: if isManagerOrOwner(resource.data.farmId, resource.data.ownerId);
+      
+      // Animal subcollections
+      match /healthRecords/{recordId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId, 
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /medications/{medicationId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /breedingEvents/{breedingId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /birthRecords/{birthId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /weaningSchedules/{weaningId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /lactationRecords/{lactationId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /services/{serviceId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /blacksmithVisits/{visitId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /movementRecords/{movementId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if isManagerOrOwner(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /feedingRecords/{feedingId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /documents/{documentId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /scheduledServices/{scheduleId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow write: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                         get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+      
+      match /incidentReports/{incidentId} {
+        allow read: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                   get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow create: if canManageAnimals(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                          get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+        allow update: if canReadFarm(get(/databases/$(database)/documents/animals/$(animalId)).data.farmId,
+                                     get(/databases/$(database)/documents/animals/$(animalId)).data.ownerId);
+      }
+    }
+    
+    // Providers - Only owners and managers can manage
+    match /veterinarians/{vetId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated(); // Will need farm-specific check
+    }
+    
+    match /blacksmiths/{blacksmithId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated(); // Will need farm-specific check
+    }
+    
+    match /feedSuppliers/{supplierId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated(); // Will need farm-specific check
+      
+      match /orders/{orderId} {
+        allow read: if isAuthenticated();
+        allow write: if isAuthenticated(); // Will need farm-specific check
+      }
+    }
+    
+    match /breedingStock/{stockId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated(); // Will need farm-specific check
+      
+      match /breedings/{breedingId} {
+        allow read: if isAuthenticated();
+        allow write: if isAuthenticated();
+      }
+    }
+    
+    match /feed/{feedId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated(); // Will need farm-specific check
+    }
+  }
+}
