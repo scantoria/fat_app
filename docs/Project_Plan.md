@@ -1,1485 +1,1558 @@
-# Project: Farm Animal Tracker Application
+# FAT APP - Master Project Plan
 
-This document outlines the refined plan for the Farm Animal Tracker application, summarizing the project's goals, technology stack, and core features.
+**Project Name:** FAT APP (Farm Animal Tracker Application)  
+**Company:** ThisByte LLC  
+**Development Lead:** Stephen  
+**Version:** 1.0  
+**Last Updated:** December 23, 2025  
+**Status:** Development Phase - MVP Build
 
-## 1. Project Goal
+---
 
-The goal of the Farm Animal Tracker application is to provide a comprehensive, centralized platform for managing the health, breeding, and logistics of horses, cattle, goats, sheep, and donkeys across multiple farm locations. The application will track critical information for each animal, including health records, breeding events, and feeding regimens, to facilitate data-driven decision-making and improve farm management efficiency.
+## Table of Contents
 
-## 1A. Business Model
+1. [Executive Summary](#executive-summary)
+2. [Project Vision & Goals](#project-vision--goals)
+3. [Business Model](#business-model)
+4. [Target Market](#target-market)
+5. [Product Overview](#product-overview)
+6. [Technology Stack](#technology-stack)
+7. [Development Phases](#development-phases)
+8. [User Roles & Permissions](#user-roles--permissions)
+9. [Animal Management](#animal-management)
+10. [Core Features (MVP)](#core-features-mvp)
+11. [Provider Consortium (Phase 2)](#provider-consortium-phase-2)
+12. [Payment & Purchase Systems](#payment--purchase-systems)
+13. [Machine Learning Strategy](#machine-learning-strategy)
+14. [Security & Compliance](#security--compliance)
+15. [Testing Strategy](#testing-strategy)
+16. [Launch Plan](#launch-plan)
+17. [Success Metrics](#success-metrics)
 
-The application is designed to be accessible to small and rural farmers while creating sustainable revenue streams through provider services.
+---
 
-### Revenue Streams
+## Executive Summary
 
-**Primary Subscription:**
-- $5.00/month per farm - Base subscription for core farm management features
-- Affordable pricing to ensure accessibility for small farmers
-- Includes full animal tracking, health records, breeding management, and offline capabilities
+FAT APP is a comprehensive farm animal management platform designed to help farmers track and manage horses, cattle, goats, sheep, and donkeys across multiple farm locations. The application provides offline-capable, professional-grade tools for health records, breeding management, lactation tracking, and farm operations.
 
-**User Licensing:**
-- Each user assigned to an Owner's farm requires a separate license
-- Owner is billed for each user license at $5.00/month per user
-- If a user works for multiple owners, each owner pays for that user's license separately
-  - Example: Farm Hand works for Owner A and Owner B
-  - Owner A pays one license fee for that user
-  - Owner B pays one license fee for that same user
-  - Total: 2 licenses billed (one to each owner)
-- Owner and designated Managers can assign user licenses
-- Billing is per active user per owner account
+**Key Differentiators:**
+- **Offline-First Design:** Full functionality without cellular coverage (critical for rural farms)
+- **Multi-Tenant Architecture:** Manage multiple farms with role-based team access
+- **Lactation Tracking:** Detailed milk production data for animal valuation
+- **Bloodline Management:** Prevents inbreeding with relationship tracking
+- **Provider Marketplace:** Future telemedicine consultations with veterinarians and specialists
+- **Affordable Pricing:** $49.99 one-time purchase (no subscription)
 
-**Provider Consortium Services (Future):**
-- **Platform Transaction Fees**: Commission on telemedicine consultations and services (e.g., 15-20% of consultation fee)
-- **Provider Subscriptions**: Veterinarians and nutritionists pay monthly fee to be listed in the consortium
-- **Premium Consultations**: Higher-tier providers can charge premium rates
-- **Custom Programs**: Nutritionists can sell custom feeding/growth programs through the platform
-- **Payment Processing Fees**: Standard transaction fees (2.9% + $0.30 per transaction)
+---
 
-**Value Proposition:**
-- Farmers: Affordable farm management + access to provider network
-- Providers: New client acquisition channel + telemedicine revenue stream
-- Platform: Scalable marketplace model with recurring revenue
+## Project Vision & Goals
 
-## 2. Membership & Organizational Structure
+### Vision Statement
+Empower farmers with professional-grade livestock management tools that work anywhere, enabling data-driven decisions that improve animal health, optimize breeding programs, and increase farm profitability.
 
-The application supports a multi-tenant organizational hierarchy where an Owner can manage multiple farms, each with its own staff, animals, and resources.
+### Primary Goals
+1. **Simplify Farm Management:** Replace paper records and spreadsheets with intuitive digital tools
+2. **Enable Offline Operations:** Full functionality in areas without reliable internet
+3. **Support Multi-Farm Operations:** Manage multiple locations with team collaboration
+4. **Facilitate Better Decisions:** Provide insights through comprehensive data tracking
+5. **Connect to Professional Services:** Enable remote consultations with veterinarians and specialists
+
+### Success Criteria (Year 1)
+- 1,000+ active farms using the platform
+- 90%+ user retention after 6 months
+- 4.5+ star rating on app stores
+- Successful launch of provider marketplace
+- Positive cash flow from app sales
+
+---
+
+## Business Model
+
+### Phase 1: App Purchase Revenue
+
+**Pricing:** $49.99 one-time purchase across all platforms (iOS, Android, Web)
+
+**Platform Revenue After Fees:**
+- iOS: $34.99 (Year 1 with 30% Apple fee), $42.49 (Year 2+ with 15% fee)
+- Android: $42.49 (15% Google fee for <$1M revenue)
+- Web: $48.24 (2.9% + $0.30 Stripe fee)
+
+**Pricing Strategy:**
+- Single price point across all platforms (brand consistency)
+- Absorb platform fee differences
+- No subscription model (one-time purchase preferred by farmers)
+- Seasonal sales only (Black Friday, etc.)
+
+### Phase 2: Provider Marketplace Revenue
+
+**Platform Fees:**
+- 10% fee on all telemedicine consultations
+- Pre-payment model (funds held in escrow until consultation complete)
+- No fees on in-person visits (builds goodwill, enables data collection)
+
+**Revenue Projections (Year 2):**
+- 100 providers × 5 consultations/week × $65 average fee × 10% = $169,000/year
+- 500 providers × 10 consultations/week × $65 average fee × 10% = $1.69M/year
+
+### Rationale for Business Model
+
+**Why One-Time Purchase:**
+- Farmers prefer ownership over subscriptions
+- Predictable cost for budget planning
+- Lower barrier to entry than $19.99/month
+- Builds trust in rural communities
+
+**Why Pre-Payment for Consultations:**
+- Based on experience with horse boarding business where payment collection was challenging
+- Protects providers from non-payment
+- Ensures platform fee collection
+- Clean workflow without collections issues
+
+---
+
+## Target Market
+
+### Primary Market: Small to Medium Commercial Farms
+- **Size:** 10-500 animals
+- **Types:** Dairy cattle, beef cattle, goat dairy, sheep operations, horse breeding/boarding
+- **Pain Points:** Paper records, scattered data, lack of insights, difficult team coordination
+- **Technology Comfort:** Moderate; need simple, intuitive interfaces
+
+### Secondary Market: Hobby Farms & Horse Owners
+- **Size:** 1-20 animals
+- **Types:** Personal horses, small livestock operations, breeding enthusiasts
+- **Pain Points:** Disorganized records, breeding tracking, health history for vet visits
+- **Technology Comfort:** Varies widely
+
+### Geographic Focus
+- **Primary:** United States (rural and suburban areas)
+- **Emphasis:** Areas with limited cellular coverage (offline functionality critical)
+- **Future:** Canada, Australia, New Zealand, UK
+
+### User Personas
+
+**Persona 1: Commercial Dairy Farmer (Primary)**
+- Name: Sarah, 42
+- Operation: 150 head dairy cattle, 2 farms
+- Team: Herself, husband, 2 employees
+- Needs: Lactation tracking, breeding schedules, health records, team task management
+- Tech: Uses smartphone daily, moderate computer skills
+
+**Persona 2: Horse Boarding Business Owner**
+- Name: Mike, 38
+- Operation: 25 horses (multiple owners), 1 location
+- Team: Himself, barn manager, 3 stable hands
+- Needs: Client horse records, service scheduling, incident documentation, billing support
+- Tech: Very comfortable, uses multiple apps
+
+**Persona 3: Cattle Rancher**
+- Name: Tom, 55
+- Operation: 300 head beef cattle, 3 pastures across 2 counties
+- Team: Himself, son, 1 ranch hand
+- Needs: Breeding tracking, health records, grazing rotation, offline access (no cell coverage)
+- Tech: Basic smartphone user, prefers simple tools
+
+---
+
+## Product Overview
+
+### Applications
+
+**1. FAT APP (Client Application)**
+- **Platforms:** Web, iOS, Android
+- **Technology:** Flutter (single codebase)
+- **Domain:** thefatapp.com
+- **Users:** Farmers, farm managers, farm staff
+
+**2. Provider Consortium (Phase 2)**
+- **Platform:** Web application
+- **Technology:** Flutter Web or React (TBD)
+- **Domain:** thefatapi.com
+- **Users:** Veterinarians, nutritionists, farriers, consultants
+
+### Key Features at a Glance
+
+**Farm Management:**
+- Multi-farm organizational structure
+- Role-based team access (Owner, Manager, Lead, Farm Hand)
+- Invitation system for team members
+
+**Animal Tracking:**
+- 5 species supported (Horses, Cattle, Goats, Sheep, Donkeys)
+- Comprehensive profiles (identification, classification, status)
+- Photo management
+- Document attachments
+
+**Health & Medical:**
+- Health records and incident tracking
+- Service scheduling (vet, farrier, etc.)
+- Vaccination tracking
+- Medication logs
+- Chronic condition management
+
+**Breeding Management:**
+- Breeding event tracking
+- Pregnancy monitoring
+- Bloodline/relationship tracking (inbreeding prevention)
+- Birth records
+- Offspring tracking
+
+**Lactation Tracking:**
+- Multiple lactation rounds
+- Frequency and volume tracking
+- Production analysis
+- Critical for dairy operations and animal valuation
+
+**Dashboard & Analytics:**
+- Aggregate metrics across all farms
+- Species breakdown
+- Pregnancy status
+- Health alerts
+- Estimated birthing dates
+
+**Offline Capability:**
+- Full functionality without internet
+- SQLite local database
+- Automatic sync when connection restored
+- Conflict resolution
+
+---
+
+## Technology Stack
+
+### Frontend
+
+**Framework:** Flutter 3.x
+- Cross-platform (Web, iOS, Android)
+- Single codebase
+- Native performance
+- Rich UI components
+
+**Key Packages:**
+- `firebase_core` - Firebase initialization
+- `firebase_auth` - Authentication
+- `cloud_firestore` - Database
+- `firebase_storage` - File storage
+- `sqflite` - Offline SQLite database
+- `connectivity_plus` - Network monitoring
+- `provider` - State management
+- `in_app_purchase` - iOS/Android purchases
+- `image_picker` - Photo capture
+- `file_picker` - Document selection
+- `pdf` - PDF generation
+
+### Backend
+
+**Platform:** Firebase
+- **Firebase Authentication:** User management, OAuth providers
+- **Cloud Firestore:** NoSQL database
+- **Firebase Storage:** File and image storage
+- **Cloud Functions:** Serverless business logic
+- **Firebase Hosting:** Web app hosting
+
+### Payment Processing
+
+**Stripe:**
+- App purchases (web platform)
+- Telemedicine payments (Phase 2)
+- Stripe Connect for provider payouts
+
+**In-App Purchase:**
+- iOS: Apple App Store
+- Android: Google Play Store
+
+### Development Tools
+
+**IDE:** VS Code or Android Studio
+**Version Control:** Git / GitHub (https://github.com/scantoria/fat_app)
+**CI/CD:** GitHub Actions (automated testing)
+**Development Approach:** Trunk-Based Development
+
+---
+
+## Development Phases
+
+### Phase 1: FAT APP MVP (Current - Q1 2026)
+
+**Goal:** Launch functional farm management app for iOS, Android, and Web
+
+**Core Features:**
+1. User authentication (email/password, Google, Apple)
+2. Multi-farm management
+3. Animal profiles and tracking
+4. Health records and medical history
+5. Breeding management with bloodline tracking
+6. Lactation tracking
+7. Service scheduling
+8. Dashboard with metrics
+9. Offline SQLite support
+10. Document/photo management
+11. Role-based permissions
+
+**Deliverables:**
+- Functional iOS app (TestFlight beta)
+- Functional Android app (Google Play beta)
+- Functional web app (thefatapp.com)
+- Complete documentation
+- Beta testing with 5 users (Stephen, wife, horse trainer, cattle farmer, veterinarian)
+
+**Timeline:** 3-4 months
+
+### Phase 2: Provider Consortium (Q2-Q3 2026)
+
+**Goal:** Launch telemedicine marketplace for provider consultations
+
+**Features:**
+1. Provider registration and credentialing
+2. Digital attestation system
+3. Automated verification (where possible)
+4. Queue-based consultation distribution
+5. Video consultations (WebRTC)
+6. Real-time transcription
+7. Favorites system
+8. Messaging between providers and clients
+9. Payment processing (Stripe Connect)
+10. Session recording with archival options
+11. Client roster management
+12. Binary feedback system
+
+**Deliverables:**
+- Provider web application (thefatapi.com)
+- Provider onboarding workflow
+- Consultation platform
+- Payment system integration
+- Admin dashboard for credentialing
+
+**Timeline:** 3-4 months
+
+### Phase 3: Machine Learning & Advanced Features (Q4 2026+)
+
+**Features:**
+1. Heat cycle prediction
+2. Health anomaly detection
+3. Milk production forecasting
+4. Computer vision for incident photos
+5. Breeding success prediction
+6. Behavior pattern recognition
+
+**Timeline:** Ongoing after Phase 2
+
+---
+
+## User Roles & Permissions
 
 ### Organizational Hierarchy
 
-- **Owner**: Top-level account holder who can create and manage multiple farms
-  - Can own multiple farms
-  - Has full administrative access across all owned farms
-  - Can assign users to specific farms with designated roles
+```
+Owner (Stephen)
+    ↓
+Multiple Farms
+    ↓
+Multiple Users (with roles)
+    ↓
+Animals, Records, Services
+```
 
-- **Farm**: Individual farm entity with its own profile and resources
-  - Each farm has its own assigned users
-  - Each farm has its own animals
-  - Each farm can have assigned veterinarians
-  - Farm-specific settings and configurations
+### Role Definitions
 
-### User Roles
+#### Owner
+- **Access:** Full access to all farms, all data, all features
+- **Capabilities:**
+  - Create and delete farms
+  - Invite and remove users
+  - Assign roles to users
+  - Manage billing and subscription
+  - View all animals across all farms
+  - Edit any record
+  - Delete any record
+  - Access admin features
 
-- **Owner**: Full access across all owned farms
-  - Create and manage farms
-  - Manage animals
-  - Manage providers (veterinarians, blacksmiths, feed suppliers, breeding stock)
-  - Manage users and role assignments
-  - Can move animals between farms owned by the same Owner
-  
-- **Manager**: Farm-level administrator with full access to assigned farm(s)
-  - Manage animals
-  - Manage providers
-  - Can move animals between farms owned by the same Owner
-  
-- **Lead**: Supervisory role with elevated permissions on assigned farm(s)
-  - Manage animals (CRUD operations, health records, breeding, services)
-  - Cannot manage providers
-  
-- **Farm Hand**: Basic access for day-to-day operations on assigned farm(s)
-  - Read-only access to view animal information and records
-  - Cannot create, edit, or delete records
+#### Manager
+- **Access:** Full access to assigned farm(s)
+- **Capabilities:**
+  - Invite users to their farm(s)
+  - Assign roles (Lead, Farm Hand) to users in their farm(s)
+  - View all animals in their farm(s)
+  - Move animals between farms (within owner's farms)
+  - Edit any record in their farm(s)
+  - Delete records in their farm(s)
+  - Cannot delete farms or remove Owner
 
-### Key Relationships
+#### Lead
+- **Access:** Read/write access to assigned farm(s)
+- **Capabilities:**
+  - View all animals in their farm(s)
+  - Add new animals
+  - Edit animal profiles
+  - Add health records
+  - Schedule services
+  - Upload documents/photos
+  - Cannot manage users or move animals between farms
 
-- One Owner → Many Farms
-- One Farm → Many Users (with assigned roles)
-- One Farm → Many Animals
-- **One Animal → One Farm** (an animal can only be assigned to one farm at a time)
-- One Farm → Many Veterinarians (assigned)
-- One User → Many Farms (with different roles per farm)
-- **Licensing**: Each owner who assigns a user must license that user separately ($5/month per user per owner)
+#### Farm Hand
+- **Access:** Read-only access to assigned farm(s)
+- **Capabilities:**
+  - View animals in their farm(s)
+  - View health records
+  - View scheduled services
+  - View documents/photos
+  - Cannot edit or delete anything
+  - Cannot add new records
 
-## 3. Animal Categories & Classifications
+### Permission Matrix
 
-The application tracks five species with standardized age categories and gender-specific types.
+| Feature | Owner | Manager | Lead | Farm Hand |
+|---------|-------|---------|------|-----------|
+| Create Farm | ✓ | ✗ | ✗ | ✗ |
+| Delete Farm | ✓ | ✗ | ✗ | ✗ |
+| Invite Users | ✓ | ✓* | ✗ | ✗ |
+| Remove Users | ✓ | ✓* | ✗ | ✗ |
+| Assign Roles | ✓ | ✓* | ✗ | ✗ |
+| Add Animals | ✓ | ✓ | ✓ | ✗ |
+| Edit Animals | ✓ | ✓ | ✓ | ✗ |
+| Delete Animals | ✓ | ✓ | ✗ | ✗ |
+| Move Animals | ✓ | ✓ | ✗ | ✗ |
+| View Animals | ✓ | ✓ | ✓ | ✓ |
+| Add Health Records | ✓ | ✓ | ✓ | ✗ |
+| Edit Health Records | ✓ | ✓ | ✓ | ✗ |
+| Delete Health Records | ✓ | ✓ | ✗ | ✗ |
+| View Health Records | ✓ | ✓ | ✓ | ✓ |
+| Schedule Services | ✓ | ✓ | ✓ | ✗ |
+| Upload Documents | ✓ | ✓ | ✓ | ✗ |
+| Download Documents | ✓ | ✓ | ✓ | ✓ |
 
-### Species
-- Horses
-- Cattle
-- Goats
-- Sheep
-- Donkeys
+*Manager can only manage users within their assigned farm(s)
 
-### Age Categories (Universal across all species)
-- **Baby**: Foal (horse), Calf (cattle/donkey), Kid (goat), Lamb (sheep)
-- **Weanling**: Recently weaned from mother
-- **Yearling**: Between 1-2 years old
-- **Adult**: Mature animal (2+ years)
+---
 
-### Gender/Type Classifications by Species
+## Animal Management
 
-**Horses:**
-- Colt (intact male)
-- Gelding (castrated male)
-- Filly (young female)
-- Mare (adult female)
-- Stallion (intact adult male)
+### Supported Species
 
-**Cattle:**
-- Bull (intact male)
-- Steer (castrated male)
-- Heifer (young female, not yet calved)
-- Cow (adult female, has calved)
+1. **Horses**
+2. **Cattle**
+3. **Goats**
+4. **Sheep**
+5. **Donkeys**
 
-**Goats:**
-- Buckling (young intact male)
-- Buck (adult intact male)
-- Wether (castrated male)
-- Doeling (young female)
-- Doe/Nanny (adult female)
+### Universal Animal Profile Fields
 
-**Sheep:**
-- Ram (intact male)
-- Wether (castrated male)
-- Ewe (female)
+**Identification:**
+- Name (required)
+- Ear Tag Number (for commercial livestock)
+- Registration Number (if applicable)
+- Microchip Number (if applicable)
+- Date of Birth or Estimated Age
+- Acquisition Date
+- Acquisition Source
 
-**Donkeys:**
-- Jack (intact male)
-- Gelding (castrated male)
-- Jenny (female)
+**Classification:**
+- Species (Horse, Cattle, Goat, Sheep, Donkey)
+- Breed
+- Color/Markings
+- Gender/Type (species-specific)
+- Age Category (Baby, Weanling, Yearling, Adult)
 
-## 3A. Animal Services & Health Management
+**Status Tracking:**
+- Current Status (Active, Sold, Deceased, Retired)
+- Current Location (Farm, Pasture/Pen)
+- Pregnancy Status (Not Pregnant, Pregnant, Recently Gave Birth)
+- Health Status (Healthy, Sick, Chronic Condition, Recovering)
 
-### Medical Administration Permissions
-- **Owner, Manager, Lead**: Can administer basic over-the-counter medication
-- **Owner, Manager**: Can record advanced medication/services and reference the veterinarian who performed the service
-- **Veterinarian Required**: Advanced medication and prescriptions (recorded by Owner/Manager)
+**Physical Information:**
+- Weight (with tracking history)
+- Height (for horses)
+- Body Condition Score
 
-### Services Tracked
-- Routine shots/vaccinations
-- Castration
-- Dehorning
-- Blacksmith/Farrier services
+**Media:**
+- Profile Photo
+- Additional Photos (gallery)
+- Documents (registration papers, health certificates, etc.)
+
+### Species-Specific Classifications
+
+#### Horses
+**Gender/Type:**
+- Stallion
+- Gelding
+- Mare
+- Filly
+- Colt
+
+**Disciplines:**
+- Show/Competition
+- Breeding
+- Pleasure/Trail
+- Working/Ranch
+- Racing
+- Other
+
+#### Cattle
+**Gender/Type:**
+- Bull
+- Steer
+- Cow
+- Heifer
+- Calf (male)
+- Calf (female)
+
+**Purpose:**
+- Dairy
+- Beef
+- Breeding
+- Show
+
+#### Goats
+**Gender/Type:**
+- Buck
+- Wether
+- Doe
+- Doeling
+- Buckling
+
+**Purpose:**
+- Dairy
+- Meat
+- Fiber
+- Breeding
+- Show
+- Pet
+
+#### Sheep
+**Gender/Type:**
+- Ram
+- Wether
+- Ewe
+- Ewe Lamb
+- Ram Lamb
+
+**Purpose:**
+- Wool
+- Meat
+- Breeding
+- Show
+
+#### Donkeys
+**Gender/Type:**
+- Jack
+- Gelding
+- Jenny
+- Jennet
+
+**Size Classification:**
+- Miniature (<36" at withers)
+- Standard (36-48" at withers)
+- Large Standard (48-54" at withers)
+- Mammoth (>54" at withers for jennies, >56" for jacks)
+
+---
+
+## Core Features (MVP)
+
+### 1. Authentication & User Management
+
+**Authentication Methods:**
+- Email/Password
+- Google Sign-In
+- Apple Sign-In
+
+**Password Requirements:**
+- Minimum 8 characters
+- At least 1 uppercase letter
+- At least 1 lowercase letter
+- At least 1 number
+- At least 1 special character
+
+**User Registration:**
+- Owner self-registration
+- Invited user registration via email invitation link
+- Invitation expiration: 7 days
+- Email verification required
+
+**Account Management:**
+- Profile editing
+- Password reset
+- Email change
+- Account deletion (with data retention options)
+
+### 2. Farm Management
+
+**Farm Creation:**
+- Farm name (required)
+- Address/Location
+- Farm type (Dairy, Beef, Horse, Mixed, etc.)
+- Total acreage (optional)
+- Number of pastures/pens
+- Contact information
+
+**Farm Settings:**
+- Default units (Imperial/Metric)
+- Timezone
+- Currency
+- Notification preferences
+
+**Team Management:**
+- Send invitations by email
+- Set role during invitation
+- Assign to specific farms
+- Remove team members
+- Change roles
+- View team activity logs
+
+### 3. Animal Profiles
+
+**Animal Creation:**
+- Required: Name, Species, Gender/Type, Date of Birth or Age
+- Optional: All other profile fields
+- Photo upload during creation
+
+**Animal Management:**
+- Edit profile information
+- Update status (pregnancy, health, location)
+- Record weight measurements
+- Add/remove photos
+- Upload documents
+- Mark as sold/deceased
+- Move between farms
+
+**Relationship Tracking:**
+- Record parents (Sire/Dam)
+- Track siblings
+- View family tree
+- Breeding history
+- Offspring list
+
+### 4. Health & Medical Records
+
+**Health Record Types:**
+- General health check
+- Illness/Injury incident
+- Surgery/Procedure
+- Vaccination
+- Deworming
+- Hoof care (horses)
+- Dental care
+- Lab results
+- Other
+
+**Health Record Details:**
+- Date and time
+- Type of record
+- Description/notes
+- Veterinarian/provider
+- Treatment provided
+- Medications prescribed
+- Cost (optional)
+- Follow-up required
+- Photos/documents
+- Resolution status
+
+**Chronic Conditions:**
+- Condition name
+- Diagnosis date
+- Ongoing treatment plan
+- Medications
+- Management notes
+- Status (Active, Managed, Resolved)
+
+**Vaccinations:**
+- Vaccine name
+- Date administered
+- Next due date
+- Veterinarian
+- Lot number
+- Expiration reminder
+
+### 5. Breeding Management
+
+**Breeding Events:**
+- Breeding date
+- Method (Natural, AI, Embryo Transfer)
+- Sire information
+- Dam information
+- Location/farm
+- Notes
+- Expected due date (auto-calculated)
+
+**Pregnancy Tracking:**
+- Confirmation date
+- Expected due date
+- Ultrasound records
 - Pregnancy checks
-- Hormone treatments
-- Veterinary services (general)
-- **Lactation tracking** (for dairy animals: cattle, goats, sheep):
-  - Lactation round/year (manually initiated when milking begins)
-  - A lactation year only counts if the animal is actively milked
-  - If baby is left to nurse, that year does not count as a lactation round
-  - Frequency of milking per day (typically twice daily)
-  - **Amount collected per milking session** (critical metric)
-  - **Milk production tracking**: High producers have greater value and produce more valuable offspring
-  - Daily, weekly, monthly, and yearly production totals
-  - **Important for show animals**: Milking protects the udder from deformation caused by rough nursing
-  - Track whether animal is being milked vs. nursing baby
+- Notes/complications
+- Photos
 
-### Breeding & Reproduction Tracking
-- **Breeding Events**: Natural or AI (Artificial Insemination)
-- **Breeding Status**: Bred or Open
-- **Heat Status**: 
-  - Manual entry of heat cycles
-  - Automatic calculation/prediction of next heat cycle based on historical data
-  - Reminders when heat is expected
-- **Birthing Schedule**: Expected due dates
-- **Weaning Schedule**: Weaning dates and methods
+**Birth Records:**
+- Birth date and time
+- Birth weight
+- Number of offspring
+- Ease of birth (Normal, Assisted, Difficult)
+- Offspring health status
+- Dam condition post-birth
+- Photos
+- Notes
 
-### Health Records
-- Medication administration (OTC and prescription)
-- Treatment records
-- General health events and observations
+**Bloodline Prevention:**
+- Automatic detection of related animals
+- Warning when attempting to breed related animals
+- Relationship degree calculation
+- Override capability (with warning confirmation)
 
-### Document Management
-Each animal profile supports file uploads for:
-- **Registration Papers**: Official breed registration documents
-- **Health Records**: Test results, medical reports, treatment history
-- **Images**: Photos of ailments/injuries, progress photos
-- **Supporting Documentation**: Other relevant files
-- **Animal Avatar**: Primary photo for visual identification
+### 6. Lactation Tracking
 
-**File Management**:
-- Documents categorized by type
-- Multiple files allowed per category
-- File size limits enforced per upload
+**Critical for Dairy Operations and Animal Valuation**
 
-## 3B. Providers & External Resources
+**Lactation Rounds:**
+- Round number
+- Start date
+- End date (when applicable)
+- Status (Active, Complete)
+- Daily production goals
 
-The application tracks various service providers and external resources used across farms.
+**Milk Production Records:**
+- Date and time
+- Volume collected
+- Frequency (times per day)
+- Quality notes
+- Temperature (if applicable)
+- Storage location
 
-### Provider Types
+**Production Analysis:**
+- Average daily production
+- Weekly/monthly totals
+- Production trends
+- Peak production date
+- Decline indicators
+- Round comparisons
 
-**Blacksmiths/Farriers**
+**Show Animal Protection:**
+- Track lactation carefully for show horses
+- Udder health monitoring
+- Production scheduling around shows
+
+### 7. Service Management
+
+**Service Types:**
+- Veterinary appointment
+- Farrier/Hoof care
+- Dental appointment
+- Breeding appointment
+- Nutrition consultation
+- Training session
+- Show/Event
+- Other
+
+**Service Scheduling:**
+- Service type
+- Date and time
+- Duration
+- Provider name
+- Location
+- Animal(s) involved
+- Notes/purpose
+- Cost estimate
+- Recurring service setup
+
+**Service History:**
+- Date performed
+- Provider
+- Animals serviced
+- Services provided
+- Actual cost
+- Notes
+- Next service recommendation
+- Photos/documents
+
+**Provider Management:**
+- Save preferred providers
 - Contact information
-- Service areas
-- Service history with farm animals
+- Service types offered
+- Service area
+- Ratings/notes
+- Cost history
 
-**Veterinarians**
-- Contact information
-- Specializations
-- Service history with farm animals
-- Referenced when recording advanced medical services
+### 8. Dashboard & Analytics
 
-**Nutritionists** (for future consortium feature)
-- Contact information
-- Specializations (dairy, beef, equine, small ruminants)
-- Credentials and certifications
-- Available for consultation requests
-- Can create custom feeding programs
+**Dashboard Overview:**
+- Total animals by species
+- Animals by farm
+- Pregnant animals by species
+- Animals with health alerts
+- Recent activity feed
+- Upcoming services
+- Recent births
+- Team activity
 
-**Feed Suppliers**
-- Contact information
-- Product catalog with pricing per feed type
-- Order history
-- Delivery schedules
+**Filtering Capabilities:**
+- By farm
+- By species
+- By gender/type
+- By pregnancy status
+- By health status
+- By age category
+- By location
 
-**Breeding Stock (Bulls/Sires/Bucks)**
-- Animals available for lease or breeding services
-- Not owned by the farm but used for breeding programs
-- Owner/source contact information
-- Breed, genetics, and lineage tracking
-- Lease terms and costs
-- Performance records
-- **Bloodline tracking to prevent inbreeding**
+**Key Metrics:**
+- Estimated birthing dates (upcoming 30/60/90 days)
+- Animals requiring attention
+- Overdue vaccinations
+- Overdue services
+- Milk production summary (for dairy operations)
+- Weight gain tracking
+- Health incident frequency
 
-### Key Relationships
-- Providers can service multiple farms
-- Farms can work with multiple providers
-- Breeding stock can be referenced across multiple breeding events
-- Service records link animals to specific providers
+**Reports (Future Enhancement):**
+- Breeding success rates
+- Health incident analysis
+- Cost analysis
+- Milk production reports
+- Weight gain reports
+- Mortality rates
+- Vaccination compliance
 
-## 4. Technology Stack
+### 9. Offline Functionality
 
-- **Frontend**: **Flutter**
-  - A cross-platform framework for building responsive applications that compile to web, Android, and iOS from a single codebase.
-
-- **Backend & Notifications**: **Firebase Cloud Functions** & **Firebase Cloud Messaging (FCM)**
-  - Firebase Cloud Functions will handle all server-side logic, and FCM will power automated push notifications for critical events.
-
-- **Database**: **Firebase Cloud Firestore**
-  - A NoSQL, document-based database providing a flexible schema to store and retrieve all animal, farm, and record data.
-  - **Offline Support**: Firestore has built-in offline persistence for mobile apps
-
-- **Local Database**: **SQLite**
-  - Local database for mobile apps (Android/iOS) to support offline operations in rural areas without cellular signal
-  - Stores critical data locally when offline
-  - Automatic synchronization with Firestore when connection is restored
-  - Conflict resolution strategy for data modified offline
-
-- **File Storage**: **Firebase Storage**
-  - Secure cloud storage for animal avatars, registration papers, health records, and supporting documents.
-
-- **Payment Processing**: **Stripe**
-  - Handles telemedicine consultation payments
-  - Provider membership billing ($5/month)
-  - Automatic 90/10 revenue split
-  - Payout processing for providers
-  - PCI compliance handled by Stripe
-
-- **Video Recording & Transcription**:
-  - WebRTC for live video streaming
-  - Google Cloud Speech-to-Text API for real-time transcription
-  - Firebase Storage for video recordings
-  - Cloud Functions for automatic transcript generation
-  - Automatic key term extraction (NLP)
-
-- **Authentication**: **Firebase Authentication**
-  - A fully managed service to handle user registration, login, and secure access to the application.
-
-- **Development Environment**: **Visual Studio Code (VS Code)**
-  - The primary Integrated Development Environment (IDE) for building the application.
-
-## 4A. Data Retention & Storage Policy
-
-### Video Recording Retention:
-
-**Free Tier (Platform-Provided):**
-- Video recordings stored for **90 days** from consultation date
-- Platform absorbs storage costs
-- Automatic deletion after 90 days
-- 7-day warning before deletion
-- Download option available anytime during 90-day period
-
-**Premium Archive Options:**
-- **Single Archive**: $2.99 per consultation video for 1 year
-- **Unlimited Archive Subscription**: $9.99/month for all videos
-- Either farmer or provider can purchase archive
-- Shared cost available (each party pays 50%)
-- Videos accessible anytime during archive period
-- Annual renewal option after 1 year
-
-**Archive Renewal:**
-- Notification sent 7 days before archive expiration
-- Renewal price: $2.99 for 1 additional year
-- No limit on renewals
-- If not renewed, video permanently deleted
-
-### Permanent Storage (No Expiration):
-
-**Always Kept:**
-- Audio transcripts (text)
+**SQLite Local Database:**
+- Full animal profiles
 - Health records
-- Consultation notes
-- Photos and images
-- Provider-entered treatment plans
-- Prescription records
-- Feedback and ratings
+- Breeding records
+- Service schedules
+- Documents/photos (cached)
 
-**Minimal Storage Cost:**
-- Text data: ~10KB per consultation
-- Photos: ~2MB average per consultation
-- Sustainable with platform revenue
+**Offline Capabilities:**
+- View all animals and records
+- Add new records
+- Edit existing records
+- Upload photos (queued)
+- Schedule services
 
-### Message Retention:
+**Sync Queue:**
+- Track all offline changes
+- Auto-sync when connection restored
+- Retry failed syncs
+- Conflict resolution (last-write-wins with user prompt)
 
-**Messages auto-delete after:**
-- 1 year from send date
-- Export option before deletion
-- Health-related messages archived in animal records (permanent)
+**Sync Indicators:**
+- Connection status indicator
+- Pending sync count
+- Sync in progress notification
+- Sync completion notification
+- Sync error alerts
 
-### Provider Notes:
+### 10. Document & Photo Management
 
-**Private notes:**
-- Kept as long as provider is active on platform
-- 30 days after provider leaves platform
-- Export option for providers
+**Photo Features:**
+- Profile photo for each animal
+- Photo gallery (multiple photos)
+- Capture from camera
+- Upload from gallery
+- Automatic compression
+- Cloud storage (Firebase Storage)
+- Offline caching
 
-### Data Export:
+**Document Features:**
+- Upload PDFs, images, Word docs
+- Registration papers
+- Health certificates
+- Purchase receipts
+- Insurance documents
+- Organize by category
+- Download capability
 
-**Farmers can export:**
-- All animal health records
-- All consultation transcripts
-- All photos and documents
-- Complete CSV of all data
+**Storage Limits:**
+- Free tier: 5 animals, 10MB total storage
+- Paid tier: Unlimited animals, 1GB storage per animal
 
-**Providers can export:**
-- Their consultation history
-- Their client list
-- Their private notes
-- Earnings history
+### 11. Search & Filtering
 
-### GDPR/Privacy Compliance:
+**Search Animals:**
+- By name
+- By ear tag number
+- By registration number
+- By microchip number
 
-- Users can request complete data deletion
-- 30-day grace period before permanent deletion
-- Anonymized data retained for platform analytics
-- Consultation videos deleted immediately on request
-- No data sold or shared with third parties
+**Filter Animals:**
+- Multiple filter combinations
+- Save filter presets
+- Quick filters (Pregnant, Sick, etc.)
 
-## 5. Database Schema
-
-The **Cloud Firestore** schema is structured with top-level collections for primary entities and subcollections for all related records. Below are the detailed field definitions for each collection.
-
-### Top-Level Collections
-
-#### **owners**
-Stores owner account information.
-
-**Fields:**
-- `ownerId` (string) - Unique identifier (Firebase Auth UID)
-- `email` (string) - Owner's email address
-- `displayName` (string) - Owner's full name
-- `phoneNumber` (string) - Contact phone number
-- `subscriptionStatus` (string) - "active", "past_due", "cancelled"
-- `subscriptionPlan` (string) - "basic" (currently only one plan)
-- `billingEmail` (string) - Email for billing notifications
-- `licensedUserCount` (number) - Number of active user licenses
-- `monthlyBillingAmount` (number) - Total monthly bill (base + user licenses)
-- `nextBillingDate` (timestamp) - Next billing date
-- `paymentMethod` (object) - Payment method details (Stripe/payment processor reference)
-- `createdAt` (timestamp) - Account creation date
-- `updatedAt` (timestamp) - Last update timestamp
+**Sort Options:**
+- Name (A-Z, Z-A)
+- Date added (Newest, Oldest)
+- Age (Youngest, Oldest)
+- Species
+- Status
 
 ---
 
-#### **users**
-Stores user profiles and farm role assignments.
+## Provider Consortium (Phase 2)
 
-**Fields:**
-- `userId` (string) - Unique identifier (Firebase Auth UID)
-- `email` (string) - User's email address
-- `displayName` (string) - User's full name
-- `phoneNumber` (string) - Contact phone number
-- `ownerId` (string) - Reference to owner account
-- `farmAssignments` (array of objects) - List of farm assignments
-  - `farmId` (string) - Reference to farm
-  - `role` (string) - "Owner", "Manager", "Lead", "Farm Hand"
-- `favoriteProviders` (array of strings) - providerIds marked as favorites
-- `createdAt` (timestamp) - Account creation date
-- `updatedAt` (timestamp) - Last update timestamp
+### Overview
 
----
+Separate web application (thefatapi.com) connecting farmers with agricultural service providers for remote consultations.
 
-#### **licenses**
-Tracks user licenses billed to owners.
+**Provider Types:**
+- Veterinarians
+- Nutritionists
+- Farriers
+- Breeding Consultants
+- Feed Specialists
+- Training Consultants
+- Other Agricultural Professionals
 
-**Fields:**
-- `licenseId` (string) - Unique identifier
-- `ownerId` (string) - Reference to owner being billed
-- `userId` (string) - Reference to licensed user
-- `userEmail` (string) - User's email
-- `userName` (string) - User's display name
-- `status` (string) - "active", "suspended", "cancelled"
-- `assignedBy` (string) - userId who created the license
-- `farmAssignments` (array of strings) - farmIds this license covers
-- `licenseStartDate` (timestamp) - When license became active
-- `licenseEndDate` (timestamp) - When license ends (null if active)
-- `monthlyRate` (number) - Monthly cost (currently $5.00)
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+### Provider Registration & Credentialing
 
----
+**5-Step Onboarding Process:**
 
-#### **farms**
-Stores information for each farm.
+**Step 1: Profile Creation**
+- Professional type
+- Basic information (name, email, phone, business name)
+- Years of experience
+- Specializations
+- Service radius (for on-site visits)
+- Service areas (states/regions licensed)
 
-**Fields:**
-- `farmId` (string) - Unique identifier
-- `ownerId` (string) - Reference to owner
-- `farmName` (string) - Name of the farm
-- `address` (object)
-  - `street` (string)
-  - `city` (string)
-  - `state` (string)
-  - `zipCode` (string)
-  - `country` (string)
-- `phoneNumber` (string) - Farm contact number
-- `email` (string) - Farm contact email
-- `totalAcres` (number) - Total farm acreage
-- `settings` (object) - Farm-specific configurations
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Step 2: Document Upload**
+- Professional license (with number and scan)
+- Educational credentials (DVM, PhD, certifications)
+- Professional liability insurance policy
+- Government-issued ID (for identity verification)
 
----
+**Step 3: Digital Attestation**
+- Review and digitally sign attestation statement
+- Certifies all information is true and accurate
+- Confirms current licensure and good standing
+- Agrees to maintain current credentials
 
-#### **animals**
-Stores the main profile for each animal.
+**Step 4: Automated Verification**
+- State license verification (API integration where available)
+- Identity verification service
+- Insurance policy verification
+- Education verification (where possible)
 
-**Fields:**
-- `animalId` (string) - Unique identifier
-- `farmId` (string) - Current farm assignment (required)
-- `ownerId` (string) - Reference to owner
-- `species` (string) - "Horse", "Cattle", "Goat", "Sheep", "Donkey"
-- `name` (string) - Animal's name
-- `earTagNumber` (string) - Ear tag identification number (for commercial livestock)
-- `registrationNumber` (string) - Official registration number (if applicable)
-- `isShowAnimal` (boolean) - Designation for show animals
-- `dateOfBirth` (timestamp) - Birth date
-- `ageCategory` (string) - "Baby", "Weanling", "Yearling", "Adult"
-- `gender` (string) - "Male", "Female"
-- `genderType` (string) - Species-specific type (e.g., "Mare", "Bull", "Doe", "Ram", "Jenny")
-- `breed` (string) - Breed name
-- `color` (string) - Primary color/markings
-- `microchipNumber` (string) - Microchip ID (if applicable)
-- `avatarUrl` (string) - URL to primary photo
-- `damId` (string) - Reference to mother animal (if owned)
-- `sireId` (string) - Reference to father (animalId or breedingStockId)
-- `bloodline` (object) - Genetic lineage information
-  - `maternalLine` (array of strings) - Maternal ancestor IDs
-  - `paternalLine` (array of strings) - Paternal ancestor IDs
-- `currentStatus` (string) - "Active", "Sold", "Deceased", "Transferred"
-- `breedingStatus` (string) - "Open", "Bred", "Pregnant", "Not Breeding"
-- `isLactating` (boolean) - Currently being milked
-- `currentLactationRound` (number) - Current lactation year number
-- `healthStatus` (string) - "Healthy", "Sick", "Under Treatment", "Recovering"
-- `weight` (number) - Current weight
-- `weightUnit` (string) - "lbs" or "kg"
-- `notes` (string) - General notes about the animal
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Step 5: Manual Review & Approval**
+- ThisByte admin reviews all documents
+- Verifies completeness and accuracy
+- Approves or requests additional information
+- SLA: ≤7 business days from application to decision
 
----
+**Credentialing SLA:**
+- Application Receipt → In Progress: ≤24 hours
+- In Progress → Final Review: ≤5 business days
+- Final Review → Decision: ≤2 business days
+- **Total: ≤7 business days**
 
-#### **veterinarians**
-Stores information for each veterinarian.
+**Status Definitions:**
+- Received
+- In Progress - License Verification
+- In Progress - Education Verification
+- In Progress - Insurance Verification
+- In Progress - Service Area Review
+- Pending Final Review
+- Approved
+- Rejected
+- More Info Needed
 
-**Fields:**
-- `veterinarianId` (string) - Unique identifier
-- `firstName` (string)
-- `lastName` (string)
-- `clinicName` (string)
-- `email` (string)
-- `phoneNumber` (string)
-- `address` (object)
-  - `street` (string)
-  - `city` (string)
-  - `state` (string)
-  - `zipCode` (string)
-- `specializations` (array of strings) - Areas of expertise
-- `serviceAreas` (array of strings) - Geographic areas served
-- `licenseNumber` (string)
-- `emergencyAvailable` (boolean)
-- `notes` (string)
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+### Queue System
 
----
+**Fair Distribution Algorithm:**
+- Weighted queue based on:
+  - Available providers in service area
+  - Provider availability status
+  - Recent consultation count (balance workload)
+  - Response time history
+  - Client feedback score
+  - Specialization match
 
-#### **blacksmiths**
-Stores information for each blacksmith/farrier.
+**Queue Management:**
+- Providers toggle availability on/off
+- Set service areas (state restrictions based on licensing)
+- Set specializations
+- Configure notification preferences
+- Set maximum consultations per day (optional)
 
-**Fields:**
-- `blacksmithId` (string) - Unique identifier
-- `firstName` (string)
-- `lastName` (string)
-- `businessName` (string)
-- `email` (string)
-- `phoneNumber` (string)
-- `address` (object)
-  - `street` (string)
-  - `city` (string)
-  - `state` (string)
-  - `zipCode` (string)
-- `serviceAreas` (array of strings) - Geographic areas served
-- `certifications` (array of strings)
-- `specialties` (array of strings) - e.g., "Corrective Shoeing", "Hot Shoeing"
-- `notes` (string)
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Prevents Gaming:**
+- No "first come first served" grabbing
+- Balances opportunities across all providers
+- Considers multiple factors, not just speed
 
----
+### Favorites System
 
-#### **feedSuppliers**
-Stores information for feed suppliers.
+**Client Benefits:**
+- Build relationships with preferred providers
+- Direct consultation requests to favorites
+- Faster booking with known providers
+- Consistency in care approach
 
-**Fields:**
-- `supplierId` (string) - Unique identifier
-- `companyName` (string)
-- `contactName` (string)
-- `email` (string)
-- `phoneNumber` (string)
-- `address` (object)
-  - `street` (string)
-  - `city` (string)
-  - `state` (string)
-  - `zipCode` (string)
-- `website` (string)
-- `deliveryAvailable` (boolean)
-- `minimumOrder` (number)
-- `paymentTerms` (string)
-- `notes` (string)
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Implementation:**
+- Clients can favorite providers after first consultation
+- Favorited consultations still charged platform fee
+- Favorites get priority in queue for that client
+- Provider sees client is a returning favorite
 
----
+### Consultation Platform
 
-#### **breedingStock**
-Stores information for bulls/sires/bucks available for lease or breeding.
+**Booking Flow:**
+1. Client selects service type
+2. Optionally selects favorite provider or queue
+3. Provides animal information and concern details
+4. Uploads photos/videos if applicable
+5. Payment processed (pre-payment model)
+6. Provider receives notification
+7. Provider accepts and schedules time
+8. Both parties receive confirmation
 
-**Fields:**
-- `breedingStockId` (string) - Unique identifier
-- `name` (string) - Animal's name
-- `species` (string) - "Horse", "Cattle", "Goat", "Sheep", "Donkey"
-- `breed` (string)
-- `registrationNumber` (string)
-- `dateOfBirth` (timestamp)
-- `color` (string)
-- `ownerName` (string) - External owner
-- `ownerContact` (object)
-  - `email` (string)
-  - `phoneNumber` (string)
-  - `address` (string)
-- `bloodline` (object) - Genetic lineage
-  - `sire` (string)
-  - `dam` (string)
-  - `paternalLine` (array of strings)
-  - `maternalLine` (array of strings)
-- `performanceRecords` (object)
-  - `showWins` (array of strings)
-  - `offspringCount` (number)
-  - `offspringPerformance` (string)
-- `leaseTerms` (object)
-  - `availabilityStatus` (string) - "Available", "Leased", "Unavailable"
-  - `leaseRate` (number)
-  - `leasePeriod` (string)
-  - `conditions` (string)
-- `geneticTesting` (array of strings) - Test results/certifications
-- `photos` (array of strings) - URLs to photos
-- `notes` (string)
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Video Consultation:**
+- WebRTC-based video calls
+- Screen sharing capability
+- Photo/video sharing during call
+- Real-time transcription (Google Speech-to-Text)
+- Session recording (optional with consent)
+
+**Recording Options:**
+- Video + Audio + Transcript
+- Transcript Only (30-40% expected to opt for this)
+- No recording
+
+**Session Archive:**
+- Pay-per-archive: $2.99/video
+- Unlimited subscription: $9.99/month
+- Automatic transcript linking to animal health records
+
+### Messaging System
+
+**Client-Provider Communication:**
+- Secure in-app messaging
+- Photo/video sharing
+- Document sharing
+- Message history per client
+- Push notifications
+
+### Client Roster (Provider View)
+
+**Provider Benefits:**
+- View all clients who've consulted with them
+- Access to client's relevant animal records (during active consultation)
+- Communication history
+- Consultation history
+- Quick re-booking
+
+**Access Controls:**
+- Providers only see clients they've worked with
+- Temporary elevated permissions during active consultations
+- Can add health records to animal profiles during consultation
+- Read-only access to animal history
+
+### Payment System
+
+See [Payment & Purchase Systems](#payment--purchase-systems) section for complete details.
+
+**Key Points:**
+- Pre-payment model
+- 10% platform fee
+- Funds held in escrow until consultation complete
+- Automatic splits (90% to provider, 10% to platform)
+- Provider payout options: Instant, Daily, Weekly
+
+### Binary Feedback System
+
+**Simple Thumbs Up/Down:**
+- No star ratings (prevents manipulation/gaming)
+- Optional written feedback
+- Binary score visible to admins only
+- Triggers review if provider falls below threshold
+
+**Quality Control:**
+- Providers with <80% positive feedback get reviewed
+- <60% positive feedback = temporary suspension
+- Action plan required to return to active status
+
+### On-Site Visit Scheduling
+
+**Request Flow:**
+1. Client requests on-site visit (during or after consultation)
+2. Provider reviews and accepts
+3. Both parties coordinate date/time
+4. Platform manages notifications
+5. Visit completed and documented
+6. No platform fee on in-person visits
+
+**Data Collection:**
+- Track on-site visit frequency
+- Capture visit purpose
+- Document outcomes
+- Link to animal health records
+- Use for analytics and ML training
+
+**Benefits:**
+- Builds provider-client relationships
+- Enables comprehensive care
+- Provides valuable data
+- No platform fee = goodwill builder
 
 ---
 
-#### **providers**
-Stores provider profiles for consortium members.
+## Payment & Purchase Systems
 
-**Fields:**
-- `providerId` (string) - Unique identifier
-- `userId` (string) - Reference to user account (if they log in)
-- `providerType` (string) - "Veterinarian", "Nutritionist", "Farrier", "Breeding Consultant", etc.
-- `firstName` (string)
-- `lastName` (string)
-- `email` (string) - Contact and login email
-- `phoneNumber` (string)
-- `businessName` (string) - Practice or business name
-- `yearsExperience` (number)
-- `specializations` (array of strings) - Areas of expertise
-- `serviceRadius` (number) - Miles willing to travel for on-site visits
-- `profilePhotoUrl` (string)
-- `bio` (string) - Provider biography
-- `licenseNumber` (string) - Provider license number
-- `licenseState` (string) - State of licensure
-- `licenseExpiration` (timestamp)
-- `insurancePolicyNumber` (string)
-- `insuranceExpiration` (timestamp)
-- `credentialStatus` (string) - "pending", "verified", "expired", "suspended", "rejected"
-- `verifiedAt` (timestamp) - When credentials were verified
-- `lastVerificationDate` (timestamp) - Most recent re-verification
-- `nextVerificationDue` (timestamp) - When re-verification needed
-- `membershipStatus` (string) - "trial", "active", "past_due", "cancelled"
-- `membershipStartDate` (timestamp) - When they joined
-- `membershipFee` (number) - Monthly fee ($5.00)
-- `trialEndDate` (timestamp) - End of free trial period
-- `experiencePremium` (number) - Additional charge for expertise ($0-25)
-- `isBoardCertified` (boolean)
-- `boardCertifications` (array of strings)
-- `totalConsultations` (number) - Total completed consultations
-- `helpfulCount` (number) - Number of "Yes" to helpful
-- `helpfulnessRate` (number) - Percentage (0-100)
-- `returnCount` (number) - Number of "Yes" to would return
-- `returnRate` (number) - Percentage (0-100)
-- `concernsReported` (number) - Total concern reports
-- `lastReviewDate` (timestamp) - Last admin quality review
-- `qualityStatus` (string) - "good_standing", "warning", "probation", "suspended"
-- `totalOnSiteVisits` (number) - Total completed on-site visits
-- `responseTimeAvg` (number) - Average response time in minutes
-- `acceptanceRate` (number) - % of consultation requests accepted
-- `favoritedByCount` (number) - Number of farmers who favorited
-- `favoritedBy` (array of strings) - userIds who favorited this provider
-- `totalClients` (number) - Unique farmers consulted
-- `activeClientsThisMonth` (number) - Consulted in last 30 days
-- `newClientsThisMonth` (number) - First consultation in last 30 days
-- `address` (object) - Business address
-  - `street` (string)
-  - `city` (string)
-  - `state` (string)
-  - `zipCode` (string)
-- `serviceAreas` (array of strings) - States/regions served
-- `availability` (object) - General availability schedule
-  - `monday` (array) - Time slots
-  - `tuesday` (array)
-  - `wednesday` (array)
-  - `thursday` (array)
-  - `friday` (array)
-  - `saturday` (array)
-  - `sunday` (array)
-- `emergencyAvailable` (boolean) - Accepts emergency consultations
-- `notes` (string) - Internal admin notes
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**See PAYMENT_PURCHASE_SYSTEMS.md for complete technical specifications.**
 
----
+### App Purchase System
 
-#### **providerCredentials**
-Stores uploaded credential documents for verification.
+**Pricing:** $49.99 one-time purchase (all platforms)
 
-**Fields:**
-- `credentialId` (string) - Unique identifier
-- `providerId` (string) - Reference to provider
-- `documentType` (string) - "License", "Education", "Insurance", "ID", "Certification"
-- `documentName` (string) - Original filename
-- `fileUrl` (string) - Firebase Storage URL
-- `fileSize` (number) - In bytes
-- `uploadedAt` (timestamp)
-- `verificationStatus` (string) - "pending", "verified", "rejected"
-- `verifiedBy` (string) - Admin userId who verified
-- `verifiedAt` (timestamp)
-- `expirationDate` (timestamp) - For licenses, insurance
-- `rejectionReason` (string) - If rejected
-- `notes` (string)
+**Purchase Platforms:**
+- iOS: Apple In-App Purchase
+- Android: Google Play Billing
+- Web: Stripe Checkout
+
+**License System:**
+- Cross-platform license keys
+- Device limit: 3 active devices
+- Automatic unlock via Firebase account
+- Manual license key entry option
+
+**Free Tier Limitations:**
+- Maximum 5 animals
+- Basic record keeping only
+- No reports/analytics
+- No telemedicine access
+- Watermarked exports
+
+**Family Sharing:**
+- Enabled on iOS (up to 6 family members)
+- Good for family farm operations
+- Builds goodwill with target market
+
+**Refund Policy:**
+- iOS/Android: Handled by Apple/Google
+- Web: 14-day money back guarantee
+
+### Telemedicine Payment System
+
+**Pre-Payment Model:**
+- Client pays before consultation
+- Funds held in escrow
+- Released after consultation complete
+- Protects both parties
+
+**Platform Fee:** 10%
+
+**Payment Methods:**
+- Manual credit card entry
+- Google Pay
+- Apple Pay
+- Future: Venmo, PayPal, ACH
+
+**Provider Onboarding:**
+- Stripe Connect Express accounts
+- Bank account linking
+- Tax ID collection
+- Identity verification
+- Automatic payouts
+
+**Edge Cases:**
+- Client no-show: Provider gets paid
+- Provider no-show: Client refunded
+- Cancellation policy: 24hr+ notice = full refund
+- Dispute resolution: Platform reviews and decides within 5 business days
+
+**Accounting Features:**
+- Transaction history for clients
+- Earnings dashboard for providers
+- Downloadable receipts (PDF)
+- Annual tax reports
+- 1099-K generation for providers
 
 ---
 
-#### **providerAttestations**
-Stores signed digital attestations.
+## Machine Learning Strategy
 
-**Fields:**
-- `attestationId` (string) - Unique identifier
-- `providerId` (string) - Reference to provider
-- `attestationText` (string) - Full attestation statement
-- `signatureImageUrl` (string) - Digital signature image
-- `ipAddress` (string) - IP where signed
-- `userAgent` (string) - Browser/device info
-- `signedAt` (timestamp)
-- `attestationType` (string) - "initial", "annual_renewal"
+### Three-Phase Approach
 
----
+**Phase 1: Data Collection (MVP)**
+- No ML features
+- Focus on collecting high-quality data:
+  - Health records
+  - Breeding cycles
+  - Lactation data
+  - Service history
+  - Incident photos
+  - Weight tracking
+  - Consultation transcripts
 
-#### **consultations**
-Stores telemedicine consultation sessions.
+**Phase 2: Predictive Models (Post-MVP)**
+- Heat cycle prediction
+- Breeding success prediction
+- Health anomaly detection
+- Milk production forecasting
+- Weight gain projections
+- Service recommendation timing
 
-**Fields:**
-- `consultationId` (string) - Unique identifier
-- `providerId` (string) - Reference to provider
-- `providerName` (string)
-- `farmerId` (string) - Reference to farmer/user
-- `farmerName` (string)
-- `animalId` (string) - Reference to animal (if applicable)
-- `animalName` (string)
-- `consultationType` (string) - "quick", "video", "emergency", "follow-up"
-- `requestDate` (timestamp) - When consultation was requested
-- `scheduledDate` (timestamp) - Scheduled time
-- `startTime` (timestamp) - Actual start time
-- `endTime` (timestamp) - Actual end time
-- `duration` (number) - Minutes
-- `status` (string) - "requested", "scheduled", "in-progress", "completed", "cancelled", "no-show"
-- `farmerIssueDescription` (string) - Farmer's description of problem
-- `symptoms` (array of strings) - Reported symptoms
-- `photos` (array of strings) - URLs to uploaded photos
-- `providerNotes` (string) - Provider's consultation notes
-- `diagnosis` (string) - Provider's diagnosis
-- `treatmentPlan` (string) - Recommended treatment
-- `prescriptions` (array of objects) - If medications prescribed
-  - `medication` (string)
-  - `dosage` (string)
-  - `frequency` (string)
-  - `duration` (string)
-- `followUpRecommended` (boolean)
-- `followUpDate` (timestamp) - Recommended follow-up date
-- `onSiteVisitRecommended` (boolean)
-- `basePrice` (number) - Base consultation fee
-- `experiencePremium` (number) - Additional fee for expertise
-- `totalPrice` (number) - Total charged to farmer
-- `platformFee` (number) - 10% platform fee
-- `providerEarnings` (number) - 90% to provider
-- `paymentStatus` (string) - "pending", "completed", "refunded"
-- `paymentDate` (timestamp)
-- `wasHelpful` (boolean) - Farmer's response to "Was this helpful?"
-- `wouldReturn` (boolean) - Farmer's response to "Would return?"
-- `farmerFeedbackComment` (string) - Optional text feedback
-- `feedbackSubmittedAt` (timestamp)
-- `concernReported` (boolean) - Did farmer report a concern?
-- `concernDescription` (string) - Details of concern
-- `recordingConsent` (object)
-  - `farmerConsented` (boolean)
-  - `providerConsented` (boolean)
-  - `bothAgreed` (boolean)
-  - `consentTimestamp` (timestamp)
-- `videoRecordingUrl` (string) - Firebase Storage URL (if recorded)
-- `recordingDuration` (number) - Minutes
-- `recordingSize` (number) - MB
-- `transcriptText` (string) - Full text transcript
-- `transcriptUrl` (string) - URL to formatted transcript document
-- `keyTermsExtracted` (array of strings) - Medications, diagnoses, symptoms
-- `keyMoments` (array of objects) - Timestamped important moments
-  - `timestamp` (number) - Seconds into recording
-  - `description` (string) - What happened
-  - `type` (string) - "diagnosis", "prescription", "recommendation"
-- `recordingRetentionExpires` (timestamp) - When video will be deleted (90 days)
-- `recordingArchived` (boolean) - Is video archived beyond 90 days?
-- `archivedBy` (string) - userId who paid for archive
-- `archiveExpiresAt` (timestamp) - When archive expires
-- `archiveCost` (number) - Cost paid for archiving
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Phase 3: Computer Vision (Long-term)**
+- Automatic health issue detection from photos
+- Incident severity assessment
+- Body condition scoring from photos
+- Behavior pattern recognition from video
+- Udder health assessment (dairy)
+
+### Data Requirements
+
+**Minimum Data for ML:**
+- 1,000+ active farms
+- 10,000+ animals tracked
+- 6+ months of data per animal
+- 50,000+ health records
+- 10,000+ breeding events
+- 5,000+ lactation records
+
+**Data Quality:**
+- Complete profiles
+- Consistent tracking
+- Accurate timestamps
+- Photo quality standards
+- Regular weight measurements
+
+**Privacy & Ethics:**
+- All data anonymized for ML training
+- Opt-out capability
+- No sharing of identifiable data
+- Comply with agricultural data privacy standards
 
 ---
 
-#### **onSiteVisits**
-Tracks in-person visits scheduled through the platform.
+## Security & Compliance
 
-**Fields:**
-- `visitId` (string) - Unique identifier
-- `consultationId` (string) - Reference to consultation that led to visit
-- `providerId` (string) - Reference to provider
-- `providerName` (string)
-- `farmerId` (string) - Reference to farmer
-- `farmerName` (string)
-- `farmId` (string) - Reference to farm location
-- `farmAddress` (string) - Visit location
-- `animalId` (string) - Animal(s) to be examined
-- `animalName` (string)
-- `requestedDate` (timestamp) - When visit was requested
-- `proposedDates` (array of timestamps) - Provider's proposed dates
-- `scheduledDate` (timestamp) - Agreed upon date/time
-- `status` (string) - "requested", "confirmed", "completed", "cancelled", "rescheduled"
-- `servicesNeeded` (array of strings) - Services to be performed
-- `estimatedCost` (number) - Provider's cost estimate
-- `actualCost` (number) - Final cost after visit
-- `estimatedDuration` (number) - Expected visit length (minutes)
-- `actualDuration` (number) - Actual visit length
-- `providerNotes` (string) - Notes before visit
-- `visitReport` (string) - Detailed report after visit
-- `servicesPerformed` (array of strings) - What was actually done
-- `findings` (string) - Provider's findings
-- `followUpRecommended` (boolean)
-- `followUpConsultationType` (string) - "telemedicine" or "on-site"
-- `followUpDate` (timestamp)
-- `farmerPreparationNotes` (string) - What farmer needs to prepare
-- `travelDistance` (number) - Miles traveled
-- `arrivalTime` (timestamp) - When provider arrived
-- `departureTime` (timestamp) - When provider left
-- `paymentMethod` (string) - "cash", "check", "card", "other"
-- `paymentStatus` (string) - "pending", "completed"
-- `farmerRating` (number) - Farmer rates visit (1-5 stars)
-- `farmerReview` (string)
-- `providerRating` (number) - Provider rates farmer preparedness
-- `providerReview` (string)
-- `photos` (array of strings) - Documentation photos
-- `noShowReason` (string) - If cancelled/no-show
-- `rescheduledFrom` (timestamp) - Original date if rescheduled
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+### Data Security
 
----
+**Authentication:**
+- Firebase Authentication (industry standard)
+- OAuth 2.0 for Google/Apple sign-in
+- Encrypted password storage (bcrypt)
+- Session management
+- Multi-device support
 
-#### **providerEarnings**
-Tracks provider earnings for accounting and analytics.
+**Data Encryption:**
+- In-transit: TLS 1.3
+- At-rest: Firebase default encryption
+- Sensitive fields: Additional field-level encryption (Stripe data)
 
-**Fields:**
-- `earningId` (string) - Unique identifier
-- `providerId` (string) - Reference to provider
-- `consultationId` (string) - Reference to consultation (if applicable)
-- `earningType` (string) - "consultation", "membership_refund", "adjustment"
-- `grossAmount` (number) - Total consultation price
-- `platformFee` (number) - 10% platform fee
-- `netAmount` (number) - Amount earned by provider (90%)
-- `payoutStatus` (string) - "pending", "processing", "completed", "failed"
-- `payoutDate` (timestamp) - When paid out
-- `payoutMethod` (string) - "bank_transfer", "paypal", etc.
-- `month` (string) - "YYYY-MM" for monthly aggregation
-- `notes` (string)
-- `createdAt` (timestamp)
+**Access Control:**
+- Role-based permissions strictly enforced
+- Firestore security rules
+- Firebase Storage rules
+- Multi-tenant isolation
+- No cross-farm data leakage
 
----
+**Payment Security:**
+- PCI-DSS compliance via Stripe
+- No credit card storage
+- Tokenized payment methods
+- Webhook signature verification
+- Fraud detection monitoring
 
-#### **messages**
-Stores provider-client messages.
+### Compliance
 
-**Fields:**
-- `messageId` (string) - Unique identifier
-- `threadId` (string) - Groups related messages
-- `senderId` (string) - userId of sender
-- `senderType` (string) - "farmer", "provider"
-- `senderName` (string) - Display name
-- `recipientId` (string) - userId of recipient
-- `recipientType` (string) - "farmer", "provider"
-- `messageType` (string) - "text", "photo", "document", "voice"
-- `messageText` (string) - Text content
-- `fileUrl` (string) - Attached file URL if applicable
-- `fileSize` (number) - File size in bytes
-- `fileName` (string) - Original filename
-- `consultationId` (string) - Related consultation (if applicable)
-- `animalId` (string) - Related animal (if applicable)
-- `animalName` (string)
-- `status` (string) - "sent", "delivered", "read"
-- `readAt` (timestamp) - When recipient read message
-- `sentAt` (timestamp)
-- `expiresAt` (timestamp) - Messages auto-delete after 1 year
+**Data Privacy:**
+- GDPR compliance (for international users)
+- CCPA compliance (California users)
+- User data export capability
+- Right to be forgotten (account deletion)
+- Privacy policy on thisbyte.com
+
+**Agricultural Data:**
+- No selling of farm data
+- Anonymized only for ML training
+- Opt-in for data usage
+- Clear data ownership policies
+
+**Financial:**
+- Money transmitter compliance (handled by Stripe)
+- Tax reporting (1099-K for providers)
+- Platform fee transparency
+- Clear terms of service
+
+### Backup & Disaster Recovery
+
+**Firebase Automatic Backups:**
+- Daily Firestore backups
+- 30-day retention
+- Point-in-time recovery
+
+**User Data Exports:**
+- Export all animal records (JSON/CSV)
+- Export photos and documents (ZIP)
+- Export service history
+- On-demand via settings
+
+**Business Continuity:**
+- Firebase 99.95% uptime SLA
+- Multi-region redundancy
+- Automatic failover
+- Incident response plan
 
 ---
 
-#### **providerNotes**
-Stores provider's private notes about clients/animals.
+## Testing Strategy
 
-**Fields:**
-- `noteId` (string) - Unique identifier
-- `providerId` (string) - Provider who created note
-- `targetType` (string) - "client", "animal"
-- `targetId` (string) - clientId or animalId
-- `targetName` (string) - Client or animal name
-- `noteText` (string) - Private note content (500 char max)
-- `reminder` (boolean) - Is this a reminder?
-- `reminderDate` (timestamp) - When to remind provider
-- `tags` (array of strings) - Searchable tags
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+### MVP Beta Testing Program
 
----
+**Beta Testers (5 people):**
+1. Stephen (Owner/Developer)
+2. Stephen's wife
+3. Horse trainer friend
+4. Cattle farmer friend
+5. Veterinarian friend
 
-#### **feed**
-Stores the different types of feed.
+**Beta Access:**
+- TestFlight (iOS)
+- Google Play Beta Track (Android)
+- Web beta (beta.thefatapp.com)
 
-**Fields:**
-- `feedId` (string) - Unique identifier
-- `feedName` (string) - Name/description of feed
-- `feedType` (string) - "Hay", "Grain", "Pellets", "Supplement", "Mineral", "Other"
-- `brand` (string)
-- `supplierId` (string) - Reference to feed supplier
-- `currentPrice` (number)
-- `priceUnit` (string) - "per bag", "per bale", "per ton"
-- `nutritionInfo` (object)
-  - `protein` (number) - percentage
-  - `fat` (number) - percentage
-  - `fiber` (number) - percentage
-  - `calories` (number)
-- `suitableFor` (array of strings) - Species this feed is suitable for
-- `storageRequirements` (string)
-- `notes` (string)
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Beta Period:** 4-6 weeks
 
-### Subcollections
+**Testing Focus Areas:**
+- User onboarding flow
+- Animal profile creation
+- Health record entry
+- Offline functionality
+- Photo uploads
+- Dashboard accuracy
+- Role-based permissions
+- Mobile responsiveness
+- Bug identification
+- Feature usability
 
-#### **Animal Subcollections**
+**Feedback Collection:**
+- Weekly check-in calls
+- In-app feedback button
+- Bug report form
+- Feature request form
+- Usability surveys
 
-**animals/{animalId}/healthRecords**
-Records general health events and observations.
+### Testing Types
 
-**Fields:**
-- `recordId` (string) - Unique identifier
-- `recordDate` (timestamp) - Date of health event
-- `recordType` (string) - "Observation", "Illness", "Injury", "Checkup", "Other"
-- `description` (string) - Details of the health event
-- `symptoms` (array of strings) - List of symptoms
-- `diagnosis` (string) - If diagnosed
-- `treatment` (string) - Treatment provided
-- `veterinarianId` (string) - Reference to vet (if applicable)
-- `recordedBy` (string) - userId of person recording
-- `resolved` (boolean) - Whether issue is resolved
-- `resolvedDate` (timestamp)
-- `notes` (string)
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Unit Tests:**
+- All business logic functions
+- Data models
+- Utility functions
+- Coverage target: 80%+
 
----
+**Widget Tests:**
+- Critical UI components
+- User interactions
+- State changes
+- Form validation
 
-**animals/{animalId}/medications**
-Tracks medication administration.
+**Integration Tests:**
+- Complete user flows
+- Offline sync
+- Authentication
+- Multi-tenant isolation
+- Role permissions
+- Payment processing
 
-**Fields:**
-- `medicationId` (string) - Unique identifier
-- `medicationName` (string)
-- `medicationType` (string) - "OTC", "Prescription"
-- `dosage` (string)
-- `frequency` (string) - e.g., "Twice daily"
-- `route` (string) - "Oral", "Injectable", "Topical", "Other"
-- `startDate` (timestamp)
-- `endDate` (timestamp)
-- `prescribedBy` (string) - veterinarianId or "OTC"
-- `administeredBy` (string) - userId
-- `reason` (string) - Reason for medication
-- `sideEffects` (string) - Any observed side effects
-- `status` (string) - "Active", "Completed", "Discontinued"
-- `notes` (string)
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Manual Testing:**
+- Cross-platform consistency
+- Accessibility
+- Performance
+- Edge cases
+- Error handling
+
+**Load Testing:**
+- Concurrent users
+- Large data sets (1000+ animals)
+- Photo uploads
+- Offline sync with many pending changes
 
 ---
 
-**animals/{animalId}/breedingEvents**
-Records breeding events.
+## Launch Plan
 
-**Fields:**
-- `breedingId` (string) - Unique identifier
-- `breedingDate` (timestamp)
-- `breedingMethod` (string) - "Natural", "AI"
-- `sireId` (string) - Reference to breedingStock or owned animal
-- `sireName` (string) - Name of sire
-- `expectedDueDate` (timestamp) - Calculated from breeding date
-- `pregnancyConfirmed` (boolean)
-- `confirmationDate` (timestamp)
-- `confirmationMethod` (string) - "Ultrasound", "Blood Test", "Palpation"
-- `veterinarianId` (string) - Vet who performed confirmation
-- `outcome` (string) - "Pregnant", "Open", "Pending", "Miscarried", "Aborted"
-- `notes` (string)
-- `recordedBy` (string) - userId
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+### Pre-Launch Checklist
 
----
+**Technical:**
+- [ ] All MVP features complete
+- [ ] All tests passing
+- [ ] Security audit complete
+- [ ] Performance optimized
+- [ ] Offline sync thoroughly tested
+- [ ] Payment system tested (Stripe test mode)
+- [ ] Firebase production rules deployed
+- [ ] Monitoring and analytics configured
 
-**animals/{animalId}/birthRecords**
-Records births and offspring information.
+**Legal:**
+- [ ] Terms of Service finalized
+- [ ] Privacy Policy updated
+- [ ] App Store agreements signed
+- [ ] Business licenses obtained
 
-**Fields:**
-- `birthId` (string) - Unique identifier
-- `birthDate` (timestamp)
-- `breedingEventId` (string) - Reference to breeding event
-- `offspringCount` (number) - Number of offspring
-- `offspring` (array of objects)
-  - `animalId` (string) - Reference to offspring animal record
-  - `gender` (string)
-  - `weight` (number)
-  - `status` (string) - "Alive", "Stillborn", "Deceased"
-- `birthType` (string) - "Natural", "Assisted", "C-Section"
-- `complications` (string) - Any complications during birth
-- `veterinarianId` (string) - If vet assisted
-- `damCondition` (string) - Mother's condition after birth
-- `notes` (string)
-- `recordedBy` (string) - userId
-- `createdAt` (timestamp)
+**Marketing:**
+- [ ] Website updated (thefatapp.com)
+- [ ] App Store listings complete (screenshots, descriptions)
+- [ ] Social media accounts created
+- [ ] Launch announcement drafted
+- [ ] Press release prepared (if desired)
 
----
+**Support:**
+- [ ] Help documentation written
+- [ ] FAQ created
+- [ ] Support email configured (support@fatapp.com)
+- [ ] Video tutorials recorded (optional)
 
-**animals/{animalId}/weaningSchedules**
-Records weaning information.
+### Launch Sequence
 
-**Fields:**
-- `weaningId` (string) - Unique identifier
-- `plannedWeaningDate` (timestamp)
-- `actualWeaningDate` (timestamp)
-- `weaningMethod` (string) - "Abrupt", "Gradual", "Fence Line"
-- `weaningAge` (number) - Age in days/months at weaning
-- `preWeaningWeight` (number)
-- `postWeaningWeight` (number)
-- `complications` (string) - Any issues during weaning
-- `notes` (string)
-- `recordedBy` (string) - userId
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Week 1: Soft Launch**
+- Beta testers continue using app
+- Monitor for critical issues
+- Fix any showstopper bugs
+- Gather final feedback
 
----
+**Week 2: iOS Launch**
+- Submit to Apple App Store
+- Review period (typically 1-3 days)
+- Address any review feedback
+- Approval and public availability
 
-**animals/{animalId}/lactationRecords**
-Tracks lactation/milking for dairy animals.
+**Week 3: Android Launch**
+- Submit to Google Play Store
+- Review period (typically 1-2 days)
+- Address any review feedback
+- Approval and public availability
 
-**Fields:**
-- `lactationId` (string) - Unique identifier
-- `recordDate` (timestamp)
-- `lactationRound` (number) - Which lactation year
-- `milkingTime` (string) - "Morning", "Evening", "Midday"
-- `amountCollected` (number) - Amount in gallons or liters
-- `unit` (string) - "gallons", "liters"
-- `milkingFrequency` (number) - Times per day (typically 2)
-- `milkQuality` (string) - "Normal", "Abnormal" (color, consistency issues)
-- `notes` (string)
-- `recordedBy` (string) - userId
-- `createdAt` (timestamp)
+**Week 4: Web Launch**
+- Deploy production web app
+- Update DNS (thefatapp.com)
+- SSL certificate configured
+- Public announcement
 
-**Aggregated fields (calculated):**
-- Daily total
-- Weekly total
-- Monthly total
-- Yearly total
-- Average per milking
+**Ongoing: Marketing**
+- Social media posts
+- Farming community forums
+- Agricultural trade shows
+- Word of mouth
+- Referral program (future)
 
 ---
 
-**animals/{animalId}/services**
-Records various services performed.
+## Success Metrics
 
-**Fields:**
-- `serviceId` (string) - Unique identifier
-- `serviceDate` (timestamp)
-- `serviceType` (string) - "Vaccination", "Castration", "Dehorning", "Pregnancy Check", "Hormone Treatment", "Other"
-- `providerId` (string) - veterinarianId or blacksmithId
-- `providerName` (string)
-- `description` (string) - Details of service
-- `products` (array of objects) - Medications/products used
-  - `name` (string)
-  - `dosage` (string)
-  - `manufacturer` (string)
-- `cost` (number)
-- `nextServiceDue` (timestamp) - For recurring services
-- `results` (string) - Outcome of service
-- `complications` (string)
-- `notes` (string)
-- `recordedBy` (string) - userId
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+### User Acquisition
 
----
+**Year 1 Goals:**
+- 1,000 active users
+- 100 users/month growth rate
+- 50% iOS, 40% Android, 10% web
+- 30% via referral/word of mouth
 
-**animals/{animalId}/blacksmithVisits**
-Records farrier/blacksmith visits.
+**Tracking:**
+- New signups per week
+- Signup source (organic, referral, paid)
+- Platform distribution
+- Geographic distribution
 
-**Fields:**
-- `visitId` (string) - Unique identifier
-- `visitDate` (timestamp)
-- `blacksmithId` (string) - Reference to blacksmith
-- `blacksmithName` (string)
-- `serviceType` (string) - "Trim", "Shoe", "Reset", "Corrective"
-- `hoofCondition` (object)
-  - `frontLeft` (string)
-  - `frontRight` (string)
-  - `backLeft` (string)
-  - `backRight` (string)
-- `workPerformed` (string) - Details of work
-- `shoeType` (string) - If shoeing
-- `cost` (number)
-- `nextVisitDue` (timestamp)
-- `notes` (string)
-- `recordedBy` (string) - userId
-- `createdAt` (timestamp)
+### User Engagement
 
----
+**Key Metrics:**
+- Daily Active Users (DAU)
+- Weekly Active Users (WAU)
+- Monthly Active Users (MAU)
+- Session length
+- Sessions per user per week
+- Feature usage breakdown
 
-**animals/{animalId}/movementRecords**
-Tracks movements between farms.
+**Health Indicators:**
+- Animals per farm (target: 20+)
+- Records per animal per month (target: 2+)
+- Team members per farm (target: 1.5+)
+- Photo uploads per animal (target: 3+)
 
-**Fields:**
-- `movementId` (string) - Unique identifier
-- `movementDate` (timestamp)
-- `fromFarmId` (string)
-- `fromFarmName` (string)
-- `toFarmId` (string)
-- `toFarmName` (string)
-- `reason` (string) - Reason for transfer
-- `transportMethod` (string)
-- `movedBy` (string) - userId who initiated move
-- `approvedBy` (string) - Manager/Owner who approved
-- `notes` (string)
-- `createdAt` (timestamp)
+### User Retention
 
----
+**Goals:**
+- 90-day retention: 70%+
+- 6-month retention: 60%+
+- 1-year retention: 50%+
 
-**animals/{animalId}/feedingRecords**
-Records feeding information.
+**Churn Analysis:**
+- Reasons for churn
+- Time to churn
+- Feature usage before churn
+- Re-activation campaigns
 
-**Fields:**
-- `feedingId` (string) - Unique identifier
-- `feedingDate` (timestamp)
-- `feedId` (string) - Reference to feed type
-- `feedName` (string)
-- `amount` (number)
-- `unit` (string) - "lbs", "kg", "flakes", "scoops"
-- `feedingTime` (string) - "Morning", "Midday", "Evening"
-- `notes` (string)
-- `recordedBy` (string) - userId
-- `createdAt` (timestamp)
+### Revenue
 
----
+**Year 1 Projections:**
+- 1,000 users × $49.99 = $49,990 gross
+- Minus platform fees ≈ $42,000 net
+- Monthly recurring: $0 (one-time purchase model)
 
-**animals/{animalId}/documents**
-Stores uploaded documents for the animal.
+**Year 2 Projections (with Provider Consortium):**
+- 5,000 users × $49.99 = $249,950 gross
+- Provider marketplace: $169,000+ (estimated)
+- **Total: $419,000 projected revenue**
 
-**Fields:**
-- `documentId` (string) - Unique identifier
-- `documentName` (string)
-- `documentType` (string) - "Registration", "Health Record", "Image", "Other"
-- `fileUrl` (string) - Firebase Storage URL
-- `fileSize` (number) - In bytes
-- `mimeType` (string)
-- `uploadedBy` (string) - userId
-- `description` (string)
-- `tags` (array of strings) - For organization
-- `uploadDate` (timestamp)
+### Customer Satisfaction
+
+**App Store Ratings:**
+- Target: 4.5+ stars
+- Monitor reviews weekly
+- Respond to negative reviews
+- Address common complaints
+
+**NPS Score:**
+- Survey after 30 days
+- Target NPS: 50+
+- Identify promoters for referrals
+- Address detractor concerns
+
+### Technical Performance
+
+**Goals:**
+- App crash rate: <0.5%
+- API response time: <500ms (p95)
+- Offline sync success: >99%
+- Photo upload success: >95%
+- Payment processing success: >99%
+
+**Monitoring:**
+- Firebase Crashlytics
+- Firebase Performance Monitoring
+- Custom analytics events
+- Error tracking (Sentry or similar)
 
 ---
 
-**animals/{animalId}/scheduledServices**
-Tracks upcoming appointments and scheduled services.
+## Appendix
 
-**Fields:**
-- `scheduleId` (string) - Unique identifier
-- `serviceType` (string) - "Vaccination", "Blacksmith", "Vet Visit", "Pregnancy Check", "Other"
-- `scheduledDate` (timestamp)
-- `providerId` (string) - veterinarianId or blacksmithId
-- `providerName` (string)
-- `description` (string)
-- `status` (string) - "Scheduled", "Completed", "Cancelled", "Rescheduled"
-- `completedDate` (timestamp)
-- `reminderSent` (boolean)
-- `notes` (string)
-- `createdBy` (string) - userId
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+### Glossary
 
----
+- **Dam:** Mother of an animal
+- **Sire:** Father of an animal
+- **Weanling:** Young animal recently weaned from mother
+- **Yearling:** Animal between 1-2 years old
+- **Lactation Round:** Period during which an animal produces milk
+- **Body Condition Score:** Assessment of animal's fat/muscle condition (scale 1-9)
+- **Heat Cycle:** Female animal's reproductive cycle
+- **AI:** Artificial Insemination
+- **DVM:** Doctor of Veterinary Medicine
+- **Farrier:** Professional who trims and shoes horse hooves
 
-**animals/{animalId}/incidentReports**
-Records incident reports submitted to veterinarians.
+### Contact Information
 
-**Fields:**
-- `incidentId` (string) - Unique identifier
-- `incidentDate` (timestamp) - When incident occurred
-- `reportedDate` (timestamp) - When report was submitted
-- `incidentType` (string) - "Injury", "Illness", "Lameness", "Behavioral", "Emergency", "Other"
-- `severity` (string) - "Low", "Medium", "High", "Critical"
-- `description` (string) - Farmer's description of incident
-- `symptoms` (array of strings) - Observable symptoms
-- `photos` (array of strings) - URLs to incident photos
-- `location` (string) - Location on animal's body (if applicable)
-- `veterinarianId` (string) - Vet the report was sent to
-- `veterinarianName` (string)
-- `status` (string) - "Submitted", "Acknowledged", "In Review", "Responded", "Resolved"
-- `vetResponse` (string) - Veterinarian's response/recommendations
-- `vetResponseDate` (timestamp)
-- `treatmentRecommendation` (string)
-- `urgencyLevel` (string) - "Can Wait", "Soon", "Urgent", "Emergency"
-- `followUpRequired` (boolean)
-- `followUpDate` (timestamp)
-- `linkedHealthRecordId` (string) - Auto-created health record
-- `reportedBy` (string) - userId
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
+**Development Lead:** Stephen  
+**Company:** ThisByte LLC  
+**Website:** https://thisbyte.com  
+**FAT APP Website:** https://thefatapp.com (post-launch)  
+**Provider Portal:** https://thefatapi.com (Phase 2)  
+**Support Email:** support@fatapp.com (post-launch)
+
+### Version History
+
+- **v1.0** (Dec 23, 2025): Initial master project plan
+- Future updates will be logged here
 
 ---
 
-#### **Provider Subcollections**
+**END OF MASTER PROJECT PLAN**
 
-**feedSuppliers/{supplierId}/orders**
-Tracks feed orders from suppliers.
-
-**Fields:**
-- `orderId` (string) - Unique identifier
-- `orderDate` (timestamp)
-- `farmId` (string) - Farm placing the order
-- `items` (array of objects)
-  - `feedId` (string)
-  - `feedName` (string)
-  - `quantity` (number)
-  - `unit` (string)
-  - `pricePerUnit` (number)
-  - `totalPrice` (number)
-- `orderTotal` (number)
-- `deliveryDate` (timestamp)
-- `deliveryStatus` (string) - "Pending", "Delivered", "Cancelled"
-- `deliveryAddress` (string)
-- `invoiceNumber` (string)
-- `paymentStatus` (string) - "Pending", "Paid", "Partial"
-- `notes` (string)
-- `orderedBy` (string) - userId
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
-
----
-
-**breedingStock/{stockId}/breedings**
-Tracks breeding events using this breeding stock.
-
-**Fields:**
-- `breedingId` (string) - Unique identifier
-- `breedingDate` (timestamp)
-- `damId` (string) - Reference to female animal
-- `damName` (string)
-- `farmId` (string) - Farm where breeding occurred
-- `method` (string) - "Natural", "AI"
-- `outcome` (string) - "Pregnant", "Open", "Pending"
-- `expectedDueDate` (timestamp)
-- `actualBirthDate` (timestamp)
-- `offspringCount` (number)
-- `offspringIds` (array of strings) - References to offspring
-- `notes` (string)
-- `createdAt` (timestamp)
-- `updatedAt` (timestamp)
-
-## 6. Core Features (Minimum Viable Product)
-
-The initial version of the application will focus on the following key features:
-
-- **Dashboard**: A landing page displaying key metrics and important information about animals.
-  - **Overview Metrics** (across all farms owned):
-    - Total number of animals by species
-    - Number of pregnant animals by species
-    - Number of currently lactating animals (being milked)
-    - Number of sick animals
-    - Number of animals by gender/type
-    - **Top milk producers** (this month/year)
-    - **Average milk production** per species
-  - **Farm-Specific View**: Same metrics filtered by individual farm
-  - Ability to toggle between complete ownership view and individual farm view
-  - **Filtering Options**: Filter animals by species, farm, gender/type, or any combination
-  - **Animal List Display**:
-    - Shows all animals with key information
-    - For pregnant animals: displays estimated birthing date
-    - For lactating animals: displays current lactation status
-    - Clickable to view detailed animal profile
-
-- **User Authentication**: Secure login and logout functionality.
-
-- **Offline Mode** (Mobile Apps):
-  - Full functionality in areas without cellular signal using SQLite local storage
-  - Automatic data synchronization when connection is restored
-  - Conflict resolution for data modified while offline
-  - Visual indicators showing online/offline status and pending sync items
-
-- **Animal Management**: Create, read, update, and delete (CRUD) operations for animal profiles.
-  - Profile includes: species, age category, gender/type, current farm assignment
-  - Show animal designation (important for udder protection and registration tracking)
-  - Photo upload for animal avatar
-  - Document uploads (registration papers, health records, images, supporting docs)
-
-- **Health & Medical Records**:
-  - Logging of general health events and observations
-  - Medication tracking (OTC and prescription) with role-based permissions
-  - Treatment records
-  - Service tracking: routine shots, castration, dehorning, pregnancy checks, hormone treatments
-
-- **Breeding Management**:
-  - Recording breeding events (Natural or AI)
-  - Reference breeding stock (bulls/sires/bucks) from external sources
-  - Tracking breeding status (Bred or Open)
-  - Heat cycle monitoring
-  - Birthing schedule with expected due dates
-  - Weaning schedule and methods
-  - **Bloodline tracking and inbreeding prevention**
-
-- **Service Provider Management**:
-  - Blacksmith/Farrier visit logging
-  - Veterinary service records
-  - **Service Scheduling**: Track upcoming and scheduled services (vaccinations, pregnancy checks, blacksmith visits, etc.)
-
-- **Incident Reporting**:
-  - Capture photos of animal incidents/injuries
-  - Write description and urgent notes
-  - Send incident report directly to veterinarian on file
-  - Automatically creates health record entry
-  - Track incident status and vet response
-
-- **Provider Consortium Access** (Future - Post-MVP):
-  - Browse available providers by type and specialization
-  - View provider profiles, ratings, and reviews
-  - Request telemedicine consultations
-  - Schedule video appointments
-  - Upload photos and describe issues before consultation
-  - Receive consultation notes and treatment plans
-  - Rate and review consultations
-  - Schedule on-site visits when needed
-  - Track consultation history
-
-- **Provider Management**:
-  - Manage contact information for veterinarians, blacksmiths, and feed suppliers
-  - Manage breeding stock (bulls/sires/bucks) with genetics and lease terms
-  - Track feed supplier pricing, orders, and delivery schedules
-  - Link providers to service records
-
-- **User Management** (Owner and Manager roles):
-  - Add and remove users from farm assignments
-  - Assign roles to users (Manager, Lead, Farm Hand)
-  - **User Licensing**: Each user assignment requires a license billed to the owner
-  - Multi-owner users require separate licenses from each owner
-  - View all licensed users and their assignments
-
-- **Subscription & Billing Management** (Owner only):
-  - View current subscription status
-  - View licensed user count and monthly charges
-  - Manage payment method
-  - View billing history
-  - Add/remove user licenses (by assigning/removing users)
-  - Automatic billing calculation: Base ($5) + (Number of users × $5)
-
-- **Logistics & Feeding**:
-  - Tracking the current farm location for each animal.
-  - Recording all animal movements between farms.
-  - Logging feed types and amounts for each animal.
-
-## 7. Future Features (Roadmap)
-
-Once the core features are complete, the following can be added to the roadmap:
-
-- **Provider Consortium & Telemedicine Platform**:
-
-  **Provider Registration & Credentialing:**
-  - Comprehensive 5-step registration process
-  - Credential verification (license, education, insurance, ID)
-  - Digital attestation with legal signature
-  - Automated verification where possible (license APIs, identity services)
-  - Annual re-verification with expiration tracking
-  - Status management: pending, verified, expired, suspended, rejected
-  - Platform orientation and training for new providers
-
-  **Provider Types Supported:**
-  - Veterinarians (general practice and specialists)
-  - Animal Nutritionists
-  - Farriers/Hoof Care Specialists
-  - Breeding Consultants
-  - Equine Dentists
-  - Livestock Behaviorists
-  - Reproduction Specialists
-  - Farm Business Consultants (future)
-  - Agricultural Extension Agents (future)
-
-  **Pricing Model:**
-  - Provider membership: FREE first month, then $5/month (or $50/year)
-  - Platform fee: 10% on telemedicine consultations
-  - No platform fee on in-person visits scheduled through platform
-  - Platform-dictated base pricing ensures fairness:
-    - Quick consultation (15 min): $35
-    - Video consultation (30 min): $65
-    - Emergency consultation: $125
-    - Follow-up (15 min): $25
-  - Experience premium: Board certified providers can add $15-25
-  - No geographic pricing - same rates nationwide
-
-  **Video Consultations:**
-  - Real-time video/audio for remote diagnosis and treatment guidance
-  - Text and photo consultations for quick questions
-  - Screen sharing for reviewing records/test results
-  - Recording capability (with consent) for documentation
-
-  **On-Site Visit Scheduling:**
-  - Providers can schedule in-person visits after consultations
-  - Platform manages engagement with automated notifications
-  - Reminders: 7 days, 1 day, 2 hours before visit
-  - Both parties coordinate directly for visit
-  - Post-visit documentation and ratings
-  - No platform fee on in-person visits
-  - Data collection for analytics and ML training
-
-  **Data Collection & Analytics:**
-  - Track telemedicine → in-person conversion rates
-  - Service type demand patterns
-  - Geographic service gaps identification
-  - Provider performance metrics
-  - Condition severity predictions (ML training)
-  - Cost analysis by service and region
-  - Follow-up consultation patterns
-
-  **Rating & Review System:**
-  - Farmers rate consultations and on-site visits
-  - Providers rate farmer interactions
-  - Quality control: <4.0 rating triggers review
-  - <3.5 rating results in suspension pending improvement
-  - Public ratings visible to farmers choosing providers
-
-  **Billing Integration:**
-  - Payment processing for telemedicine consultations
-  - Stripe/payment processor integration
-  - Automatic 90/10 split (provider/platform)
-  - Monthly provider membership billing
-  - Direct payment for on-site visits (outside platform)
-
-  **Response Time Requirements:**
-  - Standard consultations: Respond within 24 hours
-  - Emergency consultations: Respond within 2 hours
-  - Missing 3+ scheduled appointments = automatic suspension
-
-  **Provider Tools:**
-  - Consultation scheduling and calendar management
-  - Patient/animal history access
-  - Prescription management (for vets)
-  - Follow-up scheduling automation
-  - Earnings dashboard and analytics
-  - Customer management (repeat clients)
-
-  **Queue & Distribution System:**
-  - Weighted queue algorithm for fair provider distribution
-  - Scoring based on: time since last consult, acceptance rate, helpfulness, specialization match
-  - Presents top 3 providers to farmer for selection
-  - New providers get opportunities while quality providers surface naturally
-
-  **Favorite Providers:**
-  - Farmers can mark providers as favorites after first consultation
-  - Direct request option to favorite providers (2-hour window)
-  - Builds provider-farmer relationships and continuity of care
-  - Providers see how many farmers have favorited them
-
-  **Feedback System:**
-  - Binary feedback: "Was this helpful?" and "Would you return?"
-  - Optional text comments
-  - Provider sees helpfulness rate and return rate
-  - Quality control triggers for providers below 70% helpfulness
-  - "Report Concern" option for serious issues
-
-  **Session Recording & Transcription:**
-  - Video recording with mutual consent
-  - Real-time audio-to-text transcription
-  - Key term extraction (diagnoses, medications)
-  - Free 90-day retention, premium archive options
-  - Download capability for offline storage
-  - Transcript kept permanently (minimal cost)
-
-  **Provider-Client Messaging:**
-  - Secure messaging between providers and farmers
-  - Available during consultations and for follow-ups
-  - Photo and document sharing
-  - Message threads organized by consultation and animal
-  - 1-year message retention with export option
-
-  **Provider Client Management:**
-  - "My Clients" dashboard for providers
-  - View all clients, animals treated, consultation history
-  - Private notes per client/animal (only provider can see)
-  - Reminders and follow-up tracking
-  - Search and filter capabilities
-  - Builds provider's practice within platform
-
-  **Data Retention Policy:**
-  - 90-day free video storage (platform absorbs cost)
-  - Premium archive: $2.99/year per video or $9.99/month unlimited
-  - Permanent transcript and health record storage
-  - Automatic deletion with advance warnings
-  - Full data export for farmers and providers
-
-- **Veterinarian Portal**: Allow veterinarians to log in and directly enter service records and prescriptions.
-
-- **Automated Alerts**: Send push notifications for upcoming appointments (e.g., vet visits) or breeding cycles.
-
-- **Reporting & Analytics**: 
-  - Generate reports on breeding success rates, health trends, and feed consumption analysis.
-  - **Milk production analytics**: Track high producers, compare performance across animals, identify valuable breeding stock based on production history.
-  - Offspring value prediction based on parent milk production.
-
-- **Mobile App**: Develop a native mobile application to allow for on-the-go data entry and access.
+This document is the single source of truth for FAT APP development. All features, specifications, and requirements should reference this document. When in doubt, refer to this plan.
